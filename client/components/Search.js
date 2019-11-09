@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: '#f0d5c9',
         padding: 10,
+        shadowColor: 'black',
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+        elevation: 8,
     },
     searchIcon: {
         marginRight: 10,
