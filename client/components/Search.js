@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#f0d5c9',
         padding: 10,
         shadowColor: 'black',
+        shadowOffset: { width: 3, height: 3 },
         shadowOpacity: 0.5,
-        shadowRadius: 3,
+        shadowRadius: 8,
         elevation: 8,
     },
     searchIcon: {
