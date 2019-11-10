@@ -8,7 +8,13 @@ import {
 } from 'react-native';
 import { vh, vw } from 'react-native-expo-viewport-units';
 import * as Font from 'expo-font';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers/index';
+import Search from './components/Search';
+import Sort from './components/Sort';
 
+const store = createStore(reducer);
 const windowSize = Dimensions.get('window');
 const background = '#5c4d48';
 
@@ -30,15 +36,17 @@ export default function App() {
 
     if (!firstLoad) {
         return (
-            <View style={styles.container}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Mountain Finder</Text>
+            <Provider store={store}>
+                <View style={styles.container}>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>Mountain Finder</Text>
+                    </View>
+                    <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
+                    <View style={styles.contentContainer}>
+                        <Text>Project 4!😎</Text>
+                    </View>
                 </View>
-                <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
-                <View style={styles.contentContainer}>
-                    <Text>Project 4!😎</Text>
-                </View>
-            </View>
+            </Provider>
         );
     }
 
