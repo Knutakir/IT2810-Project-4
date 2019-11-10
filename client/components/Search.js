@@ -3,16 +3,37 @@ import {
     View,
     TextInput,
     StyleSheet,
+    Text,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setSearchValue } from '../actions';
 
-function Search() {
+// TODO: is `searchValue` needed in this component?
+// eslint-disable-next-line react/prop-types
+function Search({onUpdateSearchValue, searchValue}) {
     const inputRef = useRef(null);
+
+    // TODO: Text is just for testing Redux => remove it later :)
 
     return (
         <View style={styles.view}>
-            <Ionicons style={styles.searchIcon} name="md-search" size={24} color="#403632" onPress={() => inputRef.current.focus()} />
-            <TextInput style={styles.searchInput} ref={inputRef} placeholder="search for mountains" placeholderTextColor="#403632a2" />
+            <Ionicons
+                style={styles.searchIcon}
+                name="md-search"
+                size={24}
+                color="#403632"
+                onPress={() => inputRef.current.focus()}
+            />
+            <TextInput
+                style={styles.searchInput}
+                ref={inputRef}
+                placeholder="search for mountains"
+                placeholderTextColor="#403632a2"
+                onChangeText={value => onUpdateSearchValue(value)}
+            />
+            <Text>{searchValue}</Text>
         </View>
     );
 }
@@ -37,4 +58,20 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Search;
+const mapStateToProps = state => ({
+    searchValue: state.searching.searchValue,
+});
+
+const mapDispatchToProps = dispatch => ({
+    onUpdateSearchValue: searchValue => dispatch(setSearchValue(searchValue)),
+});
+
+Search.propTypes = {
+    onUpdateSearchValue: PropTypes.func,
+};
+
+Search.defaultProps = {
+    onUpdateSearchValue: null,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
