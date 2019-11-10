@@ -47,6 +47,7 @@
         "arrow-parens": "off",
         "no-plusplus": "off",
         "no-underscore-dangle": "off",
+        "global-require": "off",
         "import/no-extraneous-dependencies": "off",
         "operator-linebreak": "off",
         "react/destructuring-assignment": "off",
