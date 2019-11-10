@@ -1,20 +1,47 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
-import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
+import React, { useState, useEffect } from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    Dimensions,
+} from 'react-native';
+import { vh } from 'react-native-expo-viewport-units';
+import * as Font from 'expo-font';
 
 const windowSize = Dimensions.get('window');
 const background = '#5c4d48';
 
 export default function App() {
-    return (
-        <View style={styles.container}>
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>Mountain Finder</Text> 
+    const [firstLoad, setFirstLoad] = useState(true);
+
+    useEffect(() => {
+        const loadFont = async () => {
+            await Font.loadAsync({
+                'dancing-script': require('./assets/fonts/Dancing_Script/DancingScript-Bold.ttf'),
+            });
+            setFirstLoad(false);
+        };
+
+        if (firstLoad) {
+            loadFont();
+        }
+    }, firstLoad);
+
+    if (!firstLoad) {
+        return (
+            <View style={styles.container}>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>Mountain Finder</Text>
+                </View>
+                <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
+                <Text>Project 4!😎</Text>
             </View>
-            <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')}></Image>
-            <Text>Project 4!😎</Text>
-            
-        </View>
+        );
+    }
+
+    return (
+        <View />
     );
 }
 
@@ -29,18 +56,20 @@ const styles = StyleSheet.create({
         width: windowSize.width,
         zIndex: 3,
         alignItems: 'center',
+        marginTop: 40,
     },
-    title: {  
-        fontSize: 70,
+    title: {
+        fontSize: 100,
         color: background,
-        fontFamily: 'DancingScript-Bold',
+        fontFamily: 'dancing-script',
+        textShadowColor: '#5c4d4840',
+        textShadowOffset: {width: 2, height: 2},
+        textShadowRadius: 2,
     },
     backgroundImage: {
         width: windowSize.width,
         height: vh(40),
         minHeight: 300,
-        resizeMode: 'stretch',   
+        resizeMode: 'stretch',
     },
 });
-
-/* text-shadow: 2px 2px #5c4d4840; */
