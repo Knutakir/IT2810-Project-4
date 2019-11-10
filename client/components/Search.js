@@ -3,19 +3,14 @@ import {
     View,
     TextInput,
     StyleSheet,
-    Text,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setSearchValue } from '../actions';
 
-// TODO: is `searchValue` needed in this component?
-// eslint-disable-next-line react/prop-types
-function Search({onUpdateSearchValue, searchValue}) {
+function Search({onUpdateSearchValue}) {
     const inputRef = useRef(null);
-
-    // TODO: Text is just for testing Redux => remove it later :)
 
     return (
         <View style={styles.view}>
@@ -33,7 +28,6 @@ function Search({onUpdateSearchValue, searchValue}) {
                 placeholderTextColor="#403632a2"
                 onChangeText={value => onUpdateSearchValue(value)}
             />
-            <Text>{searchValue}</Text>
         </View>
     );
 }
@@ -59,10 +53,6 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = state => ({
-    searchValue: state.searching.searchValue,
-});
-
 const mapDispatchToProps = dispatch => ({
     onUpdateSearchValue: searchValue => dispatch(setSearchValue(searchValue)),
 });
@@ -75,4 +65,4 @@ Search.defaultProps = {
     onUpdateSearchValue: null,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);
