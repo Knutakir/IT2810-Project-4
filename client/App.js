@@ -6,7 +6,7 @@ import {
     Image,
     Dimensions,
 } from 'react-native';
-import { vh } from 'react-native-expo-viewport-units';
+import { vh, vw } from 'react-native-expo-viewport-units';
 import * as Font from 'expo-font';
 
 const windowSize = Dimensions.get('window');
@@ -35,7 +35,9 @@ export default function App() {
                     <Text style={styles.title}>Mountain Finder</Text>
                 </View>
                 <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
-                <Text>Project 4!😎</Text>
+                <View style={styles.contentContainer}>
+                    <Text>Project 4!😎</Text>
+                </View>
             </View>
         );
     }
@@ -69,7 +71,11 @@ const styles = StyleSheet.create({
     backgroundImage: {
         width: windowSize.width,
         height: vh(40),
-        minHeight: 300,
         resizeMode: 'stretch',
+    },
+    contentContainer: {
+        height: vh(60),
+        width: vw(90),
+        alignItems: 'center',
     },
 });
