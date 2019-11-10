@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
+export const SORTING_TYPE = 'SORTING_TYPE';
+export const SORTING_ORDER = 'SORTING_ORDER';
 export const UPDATE_SEARCH_VALUE = 'UPDATE_SEARCH_VALUE';

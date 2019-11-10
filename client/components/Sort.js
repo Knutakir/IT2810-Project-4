@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     View,
     Text,
@@ -6,11 +6,16 @@ import {
     StyleSheet,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setSortingType, setSortingOrder } from '../actions';
 
-function Sort() {
-    const [sortingType, setSortingType] = useState('name');
-    const [sortingOrder, setSortingOrder] = useState(-1);
-
+function Sort({
+    onUpdateSortingType,
+    onUpdateSortingOrder,
+    sortingType,
+    sortingOrder,
+}) {
     return (
         <View style={styles.view}>
             <Text style={styles.text}>Sort by</Text>
@@ -18,7 +23,7 @@ function Sort() {
                 <Picker
                     selectedValue={sortingType}
                     style={styles.picker}
-                    onValueChange={itemValue => setSortingType(itemValue)}
+                    onValueChange={itemValue => onUpdateSortingType(itemValue)}
                 >
                     <Picker.Item label="Mountain" value="name" color="rgb(64, 54, 50)" />
                     <Picker.Item label="Height" value="height" color="rgb(64, 54, 50)" />
@@ -32,7 +37,7 @@ function Sort() {
                 name={(sortingOrder === 1) ? ('md-arrow-round-up') : ('md-arrow-round-down')}
                 size={28}
                 color="#403632"
-                onPress={() => setSortingOrder(-sortingOrder)}
+                onPress={() => onUpdateSortingOrder(-sortingOrder)}
             />
         </View>
     );
@@ -75,4 +80,28 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Sort;
+const mapStateToProps = state => ({
+    sortingType: state.sorting.sortingType,
+    sortingOrder: state.sorting.sortingOrder,
+});
+
+const mapDispatchToProps = dispatch => ({
+    onUpdateSortingType: sortingType => dispatch(setSortingType(sortingType)),
+    onUpdateSortingOrder: sortingOrder => dispatch(setSortingOrder(sortingOrder)),
+});
+
+Sort.propTypes = {
+    onUpdateSortingType: PropTypes.func,
+    onUpdateSortingOrder: PropTypes.func,
+    sortingType: PropTypes.string,
+    sortingOrder: PropTypes.number,
+};
+
+Sort.defaultProps = {
+    onUpdateSortingType: null,
+    onUpdateSortingOrder: null,
+    sortingType: 'height',
+    sortingOrder: -1,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);
