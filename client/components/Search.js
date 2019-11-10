@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         fontSize: 16,
+        color: 'rgb(64, 54, 50)',
     },
 });
 
