@@ -76,8 +76,11 @@ function Filter({
             </View>
             <Text style={commonStyles.text}>Filter by mountain height:</Text>
             <View style={styles.sliderView}>
-                <Text style={styles.sliderText}>{sliderHeightValues[0]}</Text>
+                <Text style={[styles.sliderText, commonStyles.text]}>{sliderHeightValues[0]}</Text>
                 <MultiSlider
+                    markerStyle={styles.sliderMarker}
+                    unselectedStyle={styles.sliderUnselected}
+                    selectedStyle={styles.sliderSelected}
                     values={sliderHeightValues}
                     min={2000}
                     max={8848}
@@ -85,19 +88,22 @@ function Filter({
                     onValuesChange={values => setSliderHeightValues(values)}
                     onValuesChangeFinish={values => onUpdateFilteringHeight(values)}
                 />
-                <Text style={styles.sliderText}>{sliderHeightValues[1]}</Text>
+                <Text style={[styles.sliderText, commonStyles.text]}>{sliderHeightValues[1]}</Text>
             </View>
             <Text style={commonStyles.text}>Filter by rating:</Text>
             <View style={styles.sliderView}>
-                <Text style={styles.sliderText}>{sliderRatingValues[0]}</Text>
+                <Text style={[styles.sliderText, commonStyles.text]}>{sliderRatingValues[0]}</Text>
                 <MultiSlider
+                    markerStyle={styles.sliderMarker}
+                    unselectedStyle={styles.sliderUnselected}
+                    selectedStyle={styles.sliderSelected}
                     values={sliderRatingValues}
                     min={0}
                     max={5}
                     onValuesChange={values => setSliderRatingValues(values)}
                     onValuesChangeFinish={values => onUpdateFilteringRating(values)}
                 />
-                <Text style={styles.sliderText}>{sliderRatingValues[1]}</Text>
+                <Text style={[styles.sliderText, commonStyles.text]}>{sliderRatingValues[1]}</Text>
             </View>
         </View>
     );
@@ -135,6 +141,15 @@ const styles = StyleSheet.create({
     sliderText: {
         fontSize: 15,
         margin: 10,
+    },
+    sliderMarker: {
+        backgroundColor: '#f0d5c9',
+    },
+    sliderUnselected: {
+        backgroundColor: '#d1a79750',
+    },
+    sliderSelected: {
+        backgroundColor: '#d1a797',
     },
 });
 

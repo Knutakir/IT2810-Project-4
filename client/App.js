@@ -44,7 +44,6 @@ export default function App() {
                     </View>
                     <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
                     <View style={styles.contentContainer}>
-                        <Text>Project 4!😎</Text>
                         <Search />
                         <Sort />
                         <Filter />
