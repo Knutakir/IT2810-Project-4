@@ -3,7 +3,6 @@ import {
     View,
     Text,
     Picker,
-    TouchableOpacity,
     StyleSheet,
     Alert,
 } from 'react-native';
@@ -13,6 +12,7 @@ import PropTypes from 'prop-types';
 import { setFilteringCountry, setFilteringHeight, setFilteringRating } from '../actions';
 import commonStyles from './commonStyles';
 import Api from '../api/mountain';
+import CustomButton from './CustomButton';
 
 function Filter({
     onUpdateFilteringCountry,
@@ -67,12 +67,7 @@ function Filter({
                         ))}
                     </Picker>
                 </View>
-                <TouchableOpacity
-                    style={[styles.button, commonStyles.shadow]}
-                    onPress={() => resetFiltering()}
-                >
-                    <Text>Reset filters</Text>
-                </TouchableOpacity>
+                <CustomButton text="Reset filters" onPress={() => resetFiltering()} />
             </View>
             <Text style={commonStyles.text}>Filter by mountain height:</Text>
             <View style={styles.sliderView}>
@@ -127,12 +122,6 @@ const styles = StyleSheet.create({
         height: 50,
         width: 150,
         color: 'rgb(64, 54, 50)',
-    },
-    button: {
-        backgroundColor: '#f0d5c9',
-        borderRadius: 5,
-        color: 'rgb(64, 54, 50)',
-        padding: 10,
     },
     sliderView: {
         flexDirection: 'row',
