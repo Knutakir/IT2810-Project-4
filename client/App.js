@@ -14,6 +14,7 @@ import reducer from './reducers/index';
 import Search from './components/Search';
 import Sort from './components/Sort';
 import Filter from './components/Filter';
+import ModifyResultContainer from './components/ModifyResultContainer';
 
 const store = createStore(reducer);
 const windowSize = Dimensions.get('window');
@@ -45,8 +46,12 @@ export default function App() {
                     <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
                     <View style={styles.contentContainer}>
                         <Search />
-                        <Sort />
-                        <Filter />
+                        <ModifyResultContainer type="Sort">
+                            <Sort />
+                        </ModifyResultContainer>
+                        <ModifyResultContainer type="Filter">
+                            <Filter />
+                        </ModifyResultContainer>
                     </View>
                 </View>
             </Provider>
