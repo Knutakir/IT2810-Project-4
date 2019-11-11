@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import reducer from './reducers/index';
 import Search from './components/Search';
 import Sort from './components/Sort';
+import Filter from './components/Filter';
 
 const store = createStore(reducer);
 const windowSize = Dimensions.get('window');
@@ -43,7 +44,9 @@ export default function App() {
                     </View>
                     <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
                     <View style={styles.contentContainer}>
-                        <Text>Project 4!😎</Text>
+                        <Search />
+                        <Sort />
+                        <Filter />
                     </View>
                 </View>
             </Provider>

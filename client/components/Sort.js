@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setSortingType, setSortingOrder } from '../actions';
+import commonStyles from './commonStyles';
 
 function Sort({
     onUpdateSortingType,
@@ -18,8 +19,8 @@ function Sort({
 }) {
     return (
         <View style={styles.view}>
-            <Text style={styles.text}>Sort by</Text>
-            <View style={[styles.pickerView, styles.shadow]}>
+            <Text style={commonStyles.text}>Sort by</Text>
+            <View style={[styles.pickerView, commonStyles.shadow]}>
                 <Picker
                     selectedValue={sortingType}
                     style={styles.picker}
@@ -31,9 +32,9 @@ function Sort({
                     <Picker.Item label="Rating" value="rating" color="rgb(64, 54, 50)" />
                 </Picker>
             </View>
-            <Text style={styles.text}>in order</Text>
+            <Text style={commonStyles.text}>in order</Text>
             <Ionicons
-                style={[styles.sortingOrder, styles.shadow]}
+                style={[styles.sortingOrder, commonStyles.shadow]}
                 name={(sortingOrder === 1) ? ('md-arrow-round-up') : ('md-arrow-round-down')}
                 size={28}
                 color="#403632"
@@ -47,9 +48,6 @@ const styles = StyleSheet.create({
     view: {
         flexDirection: 'row',
         alignItems: 'center',
-    },
-    text: {
-        color: '#d1a797',
     },
     pickerView: {
         backgroundColor: '#f0d5c9',
@@ -70,13 +68,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: 'rgb(64, 54, 50)',
         marginLeft: 10,
-    },
-    shadow: {
-        shadowColor: 'black',
-        shadowOffset: { width: 3, height: 3 },
-        shadowOpacity: 0.5,
-        shadowRadius: 8,
-        elevation: 8,
     },
 });
 
