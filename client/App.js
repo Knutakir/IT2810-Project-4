@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import reducer from './reducers/index';
 import Search from './components/Search';
 import Sort from './components/Sort';
+import List from './components/List';
 
 const store = createStore(reducer);
 const windowSize = Dimensions.get('window');
@@ -44,6 +45,7 @@ export default function App() {
                     <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
                     <View style={styles.contentContainer}>
                         <Text>Project 4!😎</Text>
+                        <List />
                     </View>
                 </View>
             </Provider>
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     title: {
-        fontSize: 100,
+        fontSize: vw(14),
         color: background,
         fontFamily: 'dancing-script',
         textShadowColor: '#5c4d4840',
