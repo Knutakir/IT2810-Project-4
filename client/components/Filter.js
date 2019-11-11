@@ -7,19 +7,23 @@ import {
     StyleSheet,
 } from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setFilteringCountry, setFilteringHeight, setFilteringRating } from '../actions';
 import commonStyles from './commonStyles';
 
-function Filter() {
+function Filter({onUpdateFilteringCountry, onUpdateFilteringHeight, onUpdateFilteringRating}) {
     const [sliderHeightValues, setSliderHeightValues] = useState([2000, 8848]);
     const [sliderRatingValues, setSliderRatingValues] = useState([0, 5]);
 
     // TODO: fetch countries from the API
 
     const resetFiltering = () => {
-        // TODO:
-        // onUpdateFilteringCountry('All');
-        // onUpdateFilteringHeight([0, 8848]);
-        // onUpdateFilteringRating([0, 5]);
+        onUpdateFilteringCountry('All');
+        onUpdateFilteringHeight([2000, 8848]);
+        setSliderHeightValues([2000, 8848]);
+        onUpdateFilteringRating([0, 5]);
+        setSliderRatingValues([0, 5]);
     };
 
     return (
@@ -48,10 +52,7 @@ function Filter() {
                     max={8848}
                     step={10}
                     onValuesChange={values => setSliderHeightValues(values)}
-                    onValuesChangeFinish={values => {
-                        // TODO: update values for redux
-                        alert(values);
-                    }}
+                    onValuesChangeFinish={values => onUpdateFilteringHeight(values)}
                 />
                 <Text style={styles.sliderText}>{sliderHeightValues[1]}</Text>
             </View>
@@ -63,10 +64,7 @@ function Filter() {
                     min={0}
                     max={5}
                     onValuesChange={values => setSliderRatingValues(values)}
-                    onValuesChangeFinish={values => {
-                        // TODO: update values for redux
-                        alert(values);
-                    }}
+                    onValuesChangeFinish={values => onUpdateFilteringRating(values)}
                 />
                 <Text style={styles.sliderText}>{sliderRatingValues[1]}</Text>
             </View>
@@ -109,4 +107,22 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Filter;
+const mapDispatchToProps = dispatch => ({
+    onUpdateFilteringCountry: filteringCountry => dispatch(setFilteringCountry(filteringCountry)),
+    onUpdateFilteringHeight: filteringHeight => dispatch(setFilteringHeight(filteringHeight)),
+    onUpdateFilteringRating: filteringRating => dispatch(setFilteringRating(filteringRating)),
+});
+
+Filter.propTypes = {
+    onUpdateFilteringCountry: PropTypes.func,
+    onUpdateFilteringHeight: PropTypes.func,
+    onUpdateFilteringRating: PropTypes.func,
+};
+
+Filter.defaultProps = {
+    onUpdateFilteringCountry: null,
+    onUpdateFilteringHeight: null,
+    onUpdateFilteringRating: null,
+};
+
+export default connect(null, mapDispatchToProps)(Filter);
