@@ -1,22 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
     Picker,
     TouchableOpacity,
     StyleSheet,
+    Alert,
 } from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setFilteringCountry, setFilteringHeight, setFilteringRating } from '../actions';
 import commonStyles from './commonStyles';
+import Api from '../api/mountain';
 
-function Filter({onUpdateFilteringCountry, onUpdateFilteringHeight, onUpdateFilteringRating}) {
+function Filter({
+    onUpdateFilteringCountry,
+    onUpdateFilteringHeight,
+    onUpdateFilteringRating,
+    filteringCountry,
+}) {
     const [sliderHeightValues, setSliderHeightValues] = useState([2000, 8848]);
     const [sliderRatingValues, setSliderRatingValues] = useState([0, 5]);
+    const [firstVisit, setFirstVisit] = useState(true);
+    const [countries, setCountries] = useState([]);
 
-    // TODO: fetch countries from the API
+    useEffect(() => {
+        if (!firstVisit) {
+            return;
+        }
+
+        const fetchCountries = async () => {
+            try {
+                const fetchedCountries = await Api.getCountries();
+                setCountries(fetchedCountries);
+                setFirstVisit(false);
+            } catch (error) {
+                Alert.alert('Error', 'Failed to retrieve list of all countries.');
+            }
+        };
+
+        fetchCountries();
+    }, [firstVisit]);
 
     const resetFiltering = () => {
         onUpdateFilteringCountry('All');
@@ -31,9 +56,15 @@ function Filter({onUpdateFilteringCountry, onUpdateFilteringHeight, onUpdateFilt
             <View style={styles.topView}>
                 <Text style={commonStyles.text}>Filter by country:</Text>
                 <View style={[styles.pickerView, commonStyles.shadow]}>
-                    <Picker style={styles.picker}>
+                    <Picker
+                        style={styles.picker}
+                        selectedValue={filteringCountry}
+                        onValueChange={itemValue => onUpdateFilteringCountry(itemValue)}
+                    >
                         <Picker.Item label="All" value="All" color="rgb(64, 54, 50)" />
-                        {/* TODO: load more from API here */}
+                        {countries.map(country => (
+                            <Picker.Item label={country} value={country.toLowerCase()} color="rgb(64, 54, 50)" key={country} />
+                        ))}
                     </Picker>
                 </View>
                 <TouchableOpacity
@@ -107,6 +138,10 @@ const styles = StyleSheet.create({
     },
 });
 
+const mapStateToProps = state => ({
+    filteringCountry: state.filtering.filteringCountry,
+});
+
 const mapDispatchToProps = dispatch => ({
     onUpdateFilteringCountry: filteringCountry => dispatch(setFilteringCountry(filteringCountry)),
     onUpdateFilteringHeight: filteringHeight => dispatch(setFilteringHeight(filteringHeight)),
@@ -117,12 +152,14 @@ Filter.propTypes = {
     onUpdateFilteringCountry: PropTypes.func,
     onUpdateFilteringHeight: PropTypes.func,
     onUpdateFilteringRating: PropTypes.func,
+    filteringCountry: PropTypes.string,
 };
 
 Filter.defaultProps = {
     onUpdateFilteringCountry: null,
     onUpdateFilteringHeight: null,
     onUpdateFilteringRating: null,
+    filteringCountry: 'All',
 };
 
-export default connect(null, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);
