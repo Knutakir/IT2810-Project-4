@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import reducer from './reducers/index';
 import Search from './components/Search';
 import Sort from './components/Sort';
+import Filter from './components/Filter';
 
 const store = createStore(reducer);
 
@@ -16,6 +17,7 @@ export default function App() {
                 <Text>Project 4!😎</Text>
                 <Search />
                 <Sort />
+                <Filter />
             </View>
         </Provider>
     );
