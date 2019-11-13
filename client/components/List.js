@@ -17,8 +17,8 @@ function List({
 }) {
     return (
         <View style={styles.list}>
-            <ListItem></ListItem>
-            <ListItem></ListItem>
+            <ListItem name='Mount Everest' country='Nepal' height={1243} rating='2.4'/>
+            <ListItem name='K2' country='Nepal' height={15553} rating='4.4'/>
         </View>
     );
 }

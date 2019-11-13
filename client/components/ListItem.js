@@ -4,7 +4,6 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    TouchableHighlight,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -17,7 +16,16 @@ export default function ListItem({
 }) {
     return (
         <TouchableOpacity style={styles.listItem}>
-            <Text>teksst</Text>
+            <View style={styles.itemColumns}>
+                <View>
+                    <Text style={styles.nameText}>{name}</Text>
+                    <Text style={styles.countryText}>{country}</Text>
+                </View>
+                <View>
+                    <Text style={styles.rightText}>{rating}</Text>
+                    <Text style={styles.rightText}>{height} m</Text>
+                </View>
+            </View>
         </TouchableOpacity>
     );
 }
@@ -31,13 +39,31 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
     },
+    itemColumns: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 10,
+        paddingRight: 20,
+        paddingLeft: 20,
+    },
+    rightText: {
+        textAlign: 'right',
+        fontSize: 20,
+        color: '#403632',
+    },
+    nameText: {
+        fontSize: 25,
+        color: '#403632',
+    },
+    countryText: {
+        fontSize: 18,
+        color: '#403632',
+    },
 });
 
 /*
-    border-radius: 5px;
-    background-color: var(--light-pink);
     box-shadow: 3px 3px 8px 1px rgba(0,0,0,0.5);
-    margin: 5px 10px;
 */
 
 ListItem.propTypes = {
