@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import reducer from './reducers/index';
 import Search from './components/Search';
 import Sort from './components/Sort';
+import List from './components/List';
 import Filter from './components/Filter';
 import ModifyResultContainer from './components/ModifyResultContainer';
 import Rating from './components/Rating';
@@ -77,6 +78,7 @@ export default function App() {
                         <Rating rating={rating} votes={rating} onSetRating={value => onStarRatingPressed(value)} />
                         <Button title="-" onPress={() => setRating(rating - 1)} />
                         <Button title="+" onPress={() => setRating(rating + 1)} />
+                        <List />
                     </View>
                 </View>
             </Provider>
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     title: {
-        fontSize: 100,
+        fontSize: vw(14),
         color: background,
         fontFamily: 'dancing-script',
         textShadowColor: '#5c4d4840',
