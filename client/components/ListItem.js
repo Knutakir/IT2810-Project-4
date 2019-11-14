@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
 export default function ListItem({
@@ -22,7 +23,10 @@ export default function ListItem({
                     <Text style={styles.countryText}>{country}</Text>
                 </View>
                 <View>
-                    <Text style={styles.rightText}>{rating}</Text>
+                    <View style={styles.rating}>
+                        <Ionicons name="md-star" size={25} color="#403632" style={styles.star} />
+                        <Text style={styles.rightText}>{rating}</Text>
+                    </View>
                     <Text style={styles.rightText}>{height} m</Text>
                 </View>
             </View>
@@ -59,6 +63,15 @@ const styles = StyleSheet.create({
     countryText: {
         fontSize: 18,
         color: '#403632',
+    },
+    rating: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    star: {
+        marginRight: 4,
     },
 });
 
