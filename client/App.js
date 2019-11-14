@@ -6,6 +6,7 @@ import {
     Image,
     Dimensions,
     Button,
+    Alert,
 } from 'react-native';
 import { vh, vw } from 'react-native-expo-viewport-units';
 import * as Font from 'expo-font';
@@ -39,6 +40,24 @@ export default function App() {
         }
     }, firstLoad);
 
+    // TODO: (re)move this function when implementing the rest
+    const onStarRatingPressed = newRating => {
+        // TODO: check if the user have rated this mountain before
+        // => if the user has rated => display "Already rated ..." message
+
+        // TODO: remove this if used a variable in the other component
+        const mountainName = 'Mount Everest';
+
+        Alert.alert(
+            `Rate '${mountainName}'?`,
+            `Do you want to rate '${mountainName}' ${newRating} star${(newRating > 1) ? 's' : ''}?`,
+            [
+                {text: 'Cancel'},
+                {text: 'Yes', onPress: () => alert('TODO: change the rating! :)')},
+            ],
+        );
+    };
+
     if (!firstLoad) {
         return (
             <Provider store={store}>
@@ -55,7 +74,7 @@ export default function App() {
                         <ModifyResultContainer type="Filter">
                             <Filter />
                         </ModifyResultContainer>
-                        <Rating rating={rating} votes={rating} onSetRating={value => alert(value)} />
+                        <Rating rating={rating} votes={rating} onSetRating={value => onStarRatingPressed(value)} />
                         <Button title="-" onPress={() => setRating(rating - 1)} />
                         <Button title="+" onPress={() => setRating(rating + 1)} />
                     </View>
