@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     View,
+    Modal,
     StyleSheet,
+    TouchableHighlight,
+    Text,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,15 +15,26 @@ function List({
     sortingType,
     sortingOrder,
 }) {
+    const [modalVisible, setModalVisible] = useState(false);
 
     const clickListItem = (country) => {
-        alert(country);
+        setModalVisible(true);
     };
 
     return (
-        <View style={styles.list}>
-            <ListItem name='Mount Everest' country='Nepal' height={1243} rating='2.4' clickItem={() => clickListItem('Mount Everest')} />
-            <ListItem name='K2' country='Nepal' height={15553} rating='4.4' clickItem={() => clickListItem('K2')} />
+        <View>
+            <View style={styles.list}>
+                <ListItem name='Mount Everest' country='Nepal' height={1243} rating='2.4' clickItem={() => clickListItem('Mount Everest')} />
+                <ListItem name='K2' country='Nepal' height={15553} rating='4.4' clickItem={() => clickListItem('K2')} />
+            </View>
+            <Modal animationType="slide" transparent={false} visible={modalVisible}>
+                <TouchableHighlight
+                    onPress={() => {
+                        setModalVisible(false);
+                    }}>
+                    <Text>Hide Modal</Text>
+                </TouchableHighlight>
+            </Modal>
         </View>
     );
 }
