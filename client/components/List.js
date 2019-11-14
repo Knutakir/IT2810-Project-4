@@ -1,10 +1,7 @@
 import React from 'react';
 import {
     View,
-    Text,
-    Picker,
     StyleSheet,
-    TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -15,10 +12,15 @@ function List({
     sortingType,
     sortingOrder,
 }) {
+
+    const clickListItem = (country) => {
+        alert(country);
+    };
+
     return (
         <View style={styles.list}>
-            <ListItem name='Mount Everest' country='Nepal' height={1243} rating='2.4'/>
-            <ListItem name='K2' country='Nepal' height={15553} rating='4.4'/>
+            <ListItem name='Mount Everest' country='Nepal' height={1243} rating='2.4' clickItem={() => clickListItem('Mount Everest')} />
+            <ListItem name='K2' country='Nepal' height={15553} rating='4.4' clickItem={() => clickListItem('K2')} />
         </View>
     );
 }

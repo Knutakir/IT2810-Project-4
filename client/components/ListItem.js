@@ -15,7 +15,7 @@ export default function ListItem({
     clickItem,
 }) {
     return (
-        <TouchableOpacity style={styles.listItem}>
+        <TouchableOpacity style={styles.listItem} activeOpacity={0.7} onPress={() => clickItem()}>
             <View style={styles.itemColumns}>
                 <View>
                     <Text style={styles.nameText}>{name}</Text>
