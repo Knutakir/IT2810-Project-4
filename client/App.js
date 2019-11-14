@@ -13,6 +13,7 @@ import { Provider } from 'react-redux';
 import reducer from './reducers/index';
 import Search from './components/Search';
 import Sort from './components/Sort';
+import List from './components/List';
 import Filter from './components/Filter';
 import ModifyResultContainer from './components/ModifyResultContainer';
 
@@ -52,6 +53,7 @@ export default function App() {
                         <ModifyResultContainer type="Filter">
                             <Filter />
                         </ModifyResultContainer>
+                        <List />
                     </View>
                 </View>
             </Provider>
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     title: {
-        fontSize: 100,
+        fontSize: vw(14),
         color: background,
         fontFamily: 'dancing-script',
         textShadowColor: '#5c4d4840',
