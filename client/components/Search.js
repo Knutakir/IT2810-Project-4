@@ -8,12 +8,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setSearchValue } from '../actions';
+import commonStyles from './commonStyles';
 
-function Search({onUpdateSearchValue}) {
+function Search({onUpdateSearchValue, searchValue}) {
     const inputRef = useRef(null);
 
     return (
-        <View style={styles.view}>
+        <View style={[styles.view, commonStyles.shadow]}>
             <Ionicons
                 style={styles.searchIcon}
                 name="md-search"
@@ -22,12 +23,22 @@ function Search({onUpdateSearchValue}) {
                 onPress={() => inputRef.current.focus()}
             />
             <TextInput
+                value={searchValue}
                 style={styles.searchInput}
                 ref={inputRef}
                 placeholder="search for mountains"
                 placeholderTextColor="#403632a2"
                 onChangeText={value => onUpdateSearchValue(value)}
             />
+            {searchValue.length > 0 && (
+                <Ionicons
+                    style={styles.searchIcon}
+                    name="md-close-circle"
+                    size={24}
+                    color="#403632"
+                    onPress={() => onUpdateSearchValue('')}
+                />
+            )}
         </View>
     );
 }
@@ -35,15 +46,10 @@ function Search({onUpdateSearchValue}) {
 const styles = StyleSheet.create({
     view: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignSelf: 'stretch',
         borderRadius: 5,
         backgroundColor: '#f0d5c9',
         padding: 10,
-        shadowColor: 'black',
-        shadowOffset: { width: 3, height: 3 },
-        shadowOpacity: 0.5,
-        shadowRadius: 8,
-        elevation: 8,
     },
     searchIcon: {
         marginRight: 10,
@@ -51,7 +57,14 @@ const styles = StyleSheet.create({
     searchInput: {
         fontSize: 16,
         color: 'rgb(64, 54, 50)',
+        marginRight: 10,
+        flexGrow: 1,
+        flexBasis: 1,
     },
+});
+
+const mapStateToProps = state => ({
+    searchValue: state.searching.searchValue,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -60,10 +73,12 @@ const mapDispatchToProps = dispatch => ({
 
 Search.propTypes = {
     onUpdateSearchValue: PropTypes.func,
+    searchValue: PropTypes.string,
 };
 
 Search.defaultProps = {
     onUpdateSearchValue: null,
+    searchValue: '',
 };
 
-export default connect(null, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
