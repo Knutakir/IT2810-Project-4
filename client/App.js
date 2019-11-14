@@ -5,6 +5,7 @@ import {
     View,
     Image,
     Dimensions,
+    Button,
 } from 'react-native';
 import { vh, vw } from 'react-native-expo-viewport-units';
 import * as Font from 'expo-font';
@@ -15,6 +16,7 @@ import Search from './components/Search';
 import Sort from './components/Sort';
 import Filter from './components/Filter';
 import ModifyResultContainer from './components/ModifyResultContainer';
+import Rating from './components/Rating';
 
 const store = createStore(reducer);
 const windowSize = Dimensions.get('window');
@@ -22,6 +24,7 @@ const background = '#5c4d48';
 
 export default function App() {
     const [firstLoad, setFirstLoad] = useState(true);
+    const [rating, setRating] = useState(1);
 
     useEffect(() => {
         const loadFont = async () => {
@@ -52,6 +55,9 @@ export default function App() {
                         <ModifyResultContainer type="Filter">
                             <Filter />
                         </ModifyResultContainer>
+                        <Rating rating={rating} votes={rating} onSetRating={value => alert(value)} />
+                        <Button title="-" onPress={() => setRating(rating - 1)} />
+                        <Button title="+" onPress={() => setRating(rating + 1)} />
                     </View>
                 </View>
             </Provider>
