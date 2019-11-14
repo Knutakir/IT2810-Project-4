@@ -1,4 +1,4 @@
-const baseAddress = 'http://it2810-43.idi.ntnu.no:3002/';
+const baseAddress = 'http://it2810-43.idi.ntnu.no:3002';
 
 const getCountries = () => new Promise((resolve, reject) => {
     fetch(`${baseAddress}/api/mountain/countries`)
