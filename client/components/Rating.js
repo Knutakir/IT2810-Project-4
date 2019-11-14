@@ -17,7 +17,7 @@ function Rating({rating, votes, onSetRating}) {
     for (let i = 0; i < 5; i++) {
         starArray.push(<Ionicons
             name={(i < roundedRating) ? 'md-star' : 'md-star-outline'}
-            size={30}
+            size={50}
             color="#d1a797"
             key={i}
             onPress={() => voteOnMountain(i + 1)}
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     },
     voteText: {
         marginLeft: 10,
+        fontSize: 18,
     },
 });
 
