@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import commonStyles from './commonStyles';
@@ -15,13 +20,19 @@ function Rating({rating, votes, onSetRating}) {
     const roundedRating = Math.round(parseFloat(rating));
 
     for (let i = 0; i < 5; i++) {
-        starArray.push(<Ionicons
-            name={(i < roundedRating) ? 'md-star' : 'md-star-outline'}
-            size={50}
-            color="#d1a797"
-            key={i}
-            onPress={() => voteOnMountain(i + 1)}
-        />);
+        starArray.push(
+            <TouchableOpacity
+                onPress={() => voteOnMountain(i + 1)}
+                key={i}
+                activeOpacity={0.6}
+            >
+                <Ionicons
+                    name={(i < roundedRating) ? 'md-star' : 'md-star-outline'}
+                    size={50}
+                    color="#d1a797"
+                />
+            </TouchableOpacity>,
+        );
     }
 
     return (
