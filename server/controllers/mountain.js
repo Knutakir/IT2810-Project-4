@@ -7,7 +7,26 @@ const advancedResultProjection = 'mountain metres latitude longitude';
 
 module.exports.getById = async (res, mountainId) => {
     try {
-        const mountain = await Mountain.findById(mountainId);
+        const tempMountain = await Mountain.findById(mountainId);
+
+        const currentRating = (Number.isNaN(tempMountain.rating.toString())) ? 0 : parseFloat(tempMountain.rating.toString());
+
+        const mountain = {
+            // eslint-disable-next-line no-underscore-dangle
+            id: tempMountain._id,
+            mountain: tempMountain.mountain,
+            metres: tempMountain.metres,
+            metresSearchable: tempMountain.metresSearchable,
+            feet: tempMountain.feet,
+            range: tempMountain.range,
+            locationAndNotes: tempMountain.locationAndNotes,
+            latitude: tempMountain.latitude,
+            longitude: tempMountain.longitude,
+            mainCountry: tempMountain.mainCountry,
+            formattedAddress: tempMountain.formattedAddress,
+            rating: currentRating,
+            votes: tempMountain.votes,
+        };
 
         return res.send({message: MESSAGE.OK, mountain});
     } catch (error) {

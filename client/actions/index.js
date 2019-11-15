@@ -5,11 +5,17 @@ import {
     FILTERING_HEIGHT,
     FILTERING_RATING,
     UPDATE_SEARCH_VALUE,
+    UPDATE_PERFORMING_SEARCH,
 } from '../actionTypes';
 
 export const setSearchValue = searchValue => ({
     type: UPDATE_SEARCH_VALUE,
     searchValue,
+});
+
+export const setPerformingSearch = performingSearch => ({
+    type: UPDATE_PERFORMING_SEARCH,
+    performingSearch,
 });
 
 export const setSortingType = sortingType => ({

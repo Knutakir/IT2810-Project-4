@@ -1,20 +1,21 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
-    Modal,
     StyleSheet,
-    TouchableHighlight,
     TouchableOpacity,
     TouchableWithoutFeedback,
     Text,
     ScrollView,
     Linking,
+    Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import { vw, vh } from 'react-native-expo-viewport-units';
-import { Platform } from '@unimodules/core';
+import Rating from './Rating';
+import Api from '../api/mountain';
+import { setPerformingSearch } from '../actions';
 
 function DetailedContent({
     mountainId,
@@ -30,9 +31,47 @@ function DetailedContent({
     onUpdatePerformingSearch,
     closeModal,
 }) {
+    const [rating, setRating] = useState(startRating);
+    const [votes, setVotes] = useState(startVotes);
 
-    const openMap = (latitude, longitude) => {
+    useEffect(() => {
+        setRating(startRating);
+    }, [startRating]);
+
+    useEffect(() => {
+        setVotes(startVotes);
+    }, [startVotes]);
+
+    const openMap = () => {
         Linking.openURL(`https://www.google.no/maps/@${latitude},${longitude},10z`);
+    };
+
+    const giveRating = async newRating => {
+        const response = await Api.giveMountainRating(mountainId, newRating);
+
+        setRating(response.rating);
+        setVotes(response.votes);
+        onUpdatePerformingSearch(true);
+    };
+
+    const onStarRatingPressed = newRating => {
+        // TODO: check if the user have rated this mountain before
+        // => if the user has rated => display "Already rated ..." message
+
+        Alert.alert(
+            `Rate '${mountain}'?`,
+            `Do you want to rate '${mountain}' ${newRating} star${(newRating > 1) ? 's' : ''}?`,
+            [
+                {text: 'Cancel'},
+                {
+                    text: 'Yes',
+                    onPress: () => {
+                        // TODO: save that the user has rated for this mountain in the async storage
+                        giveRating(newRating);
+                    },
+                },
+            ],
+        );
     };
 
     return (
@@ -58,12 +97,12 @@ function DetailedContent({
                         <Text style={styles.valueText}>{formattedAddress}</Text>
                         <Text style={styles.boldText}>Position</Text>
                         <Text style={styles.valuePositionText}>latitude: {latitude}, longitude: {longitude}</Text>
-                        <TouchableOpacity activeOpacity={0.7} onPress={() => openMap(latitude, longitude)}>
+                        <TouchableOpacity activeOpacity={0.7} onPress={() => openMap()}>
                             <Text style={[styles.valueText, styles.mapText]}>Open in Google Maps</Text>
                         </TouchableOpacity>
                         <Text style={styles.boldText}>Rating</Text>
                         <View style={styles.ratingContainer}>
-                            <Text>{startRating}</Text>
+                            <Rating rating={rating} votes={votes} onSetRating={value => onStarRatingPressed(value)} />
                         </View>
                     </View>
                 </View>
@@ -75,9 +114,9 @@ function DetailedContent({
 const styles = StyleSheet.create({
     modalContentContainer: {
         backgroundColor: '#fdebe0',
-	    width: vw(90),
-		maxHeight: vh(90),
-	    borderRadius: 5,
+        width: vw(90),
+        maxHeight: vh(90),
+        borderRadius: 5,
         marginTop: vh(4),
         padding: 20,
     },
@@ -127,7 +166,7 @@ DetailedContent.propTypes = {
     formattedAddress: PropTypes.string,
     latitude: PropTypes.number,
     longitude: PropTypes.number,
-    startRating: PropTypes.string,
+    startRating: PropTypes.number,
     startVotes: PropTypes.number,
     onUpdatePerformingSearch: PropTypes.func,
     closeModal: PropTypes.func,
@@ -156,4 +195,4 @@ const mapDispatchToProps = dispatch => ({
     onUpdatePerformingSearch: performingSearch => dispatch(setPerformingSearch(performingSearch)),
 });
 
-export default connect(mapStateToProps)(DetailedContent);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailedContent);
