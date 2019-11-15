@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         padding: 3,
     },
     button: {
-        padding: 3,
+        padding: 6,
     },
     textView: {
         flexDirection: 'row',
