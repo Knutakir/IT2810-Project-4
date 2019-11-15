@@ -55,7 +55,30 @@ Picker, small other changes
 
 Another challenge was to adapt the application to both the iPhone and the Samsung Tab. The iPhone that were used is a very small device, and the tab is significantly larger. This lead to "småfiksing" to make the application look good enough on all of the devices, where a library with viewport height and width came in handy. 
 
-Some screenshots: 
+Screenshots from the different devices: 
+<div style="text-align: center">
+<strong>Image 1 and 2: Iphone 5s<strong><br>
+<img src="./images/iphone1.png" height=350/> <img src="./images/iphone2.png" height=350/><br>
+
+<strong>Image 3 and 4: Iphone 5s<strong><br>
+<img src="./images/iphone3.png" height=350/> <img src="./images/iphone4.png" height=350/>
+
+<strong>Image 5: Iphone 5s<strong><br>
+<img src="./images/iphone5.png" height=350/> 
+
+<strong>Image 6 and 7: Samsung Galaxy S9+<strong><br>
+<img src="./images/samsung94.png" height=350/> <img src="./images/samsung93.png" height=350/><br>
+
+<strong>Image 8 and 9: Samsung Galaxy S9+<strong><br>
+<img src="./images/samsung92.png" height=350/> <img src="./images/samsung91.png" height=350/><br>
+
+<strong>Image 10 and 11: Samsung Galaxy Tab S2<strong><br>
+<img src="./images/samsung22.png" height=350/> <img src="./images/samsung24.png" height=350/><br>
+
+<strong>Image 12 and 13: Samsung Galaxy Tab S2<strong><br>
+<img src="./images/samsung25.png" height=350/> <img src="./images/samsung21.png" height=350/><br>
+</div>
+
 
 
 ### Manual end-to-end testing
