@@ -49,7 +49,7 @@ The command line interface also provided fast upload of the application after ev
 In this project the group used `AsyncStorage` for storing the if the user has rated a mountain in the mobile application. AsyncStorage made it possible for persistance data to be stored on the device from one to the next run. `AsyncStorage` works similiar to `LocalStorage` for the web, but is asynchronous and returns a `Promise`. The feature we implemented is available after searching/filtering/sorting and selecting a mountain to open the modal with the given mountain. Then on the bottom of the modal there is stars that can be used for rate the selected mountain. The user of the application is only available to rate a mountain once and this is stored in the AsyncStorage and checked every time a mountain is selected. If a selected mountain is already rated by the user of the application, then a message appears to the user over the stars and if the user presses the stars. 
 
 ## Git usage and code style
-The group used issues with connected branches for the bigger tasks of the project. The commits was also marked with which issue they contributed to. 
+The group used issues with connected branches for the bigger tasks of the project. The commits are marked with which issue they contribute to. 
 
 ### Lint
 The group used ESLint for linting. To run the linting, use this command in the `server` or `client` directory: 
@@ -60,18 +60,18 @@ $ npm run lint
 ## Testing
 ### Responsive design and OS
 
-
 The group tested the application and made sure that the different filtering options worked together, and that they worked with search and sorting. The pagination and rating was tested. The group made sure that AsyncStorage worked as intended, also after reopening the application. 
 
 All of these functionalites were tested on both iOS and Android. There was also done testing of the responsive design, to make sure that it woked well on different sizes. 
 
-The group tested the application on three different mobile devices, an iPhone 5s with iOS, a Samsung Galaxy Tab S2 with Android and a Samsung Galaxy S9+.
+The group tested the application on three different mobile devices, an iPhone 5s with iOS, a Samsung Galaxy Tab S2 with Android and a Samsung Galaxy S9+ with Android.
 
-Picker, small other changes
+There were not many big changes that had to be done to make te application usable on both iOS and Android. The main difference in design is the `Picker` for the filters, as can be seen in Image 2 (iOS) and Image 11 (Android).
 
-Another challenge was to adapt the application to both the iPhone and the Samsung Tab. The iPhone that were used is a very small device, and the tab is significantly larger. This lead to "småfiksing" to make the application look good enough on all of the devices, where a library with viewport height and width came in handy. 
+Another challenge was to adapt the application to both the iPhone and the Samsung Tab. The iPhone that was used is a very small device, and the tab is significantly larger. This lead to a lot of small fixes to make the application look good enough on all of the devices. A library with viewport height and width came in handy for this. 
 
-Screenshots from the different devices: 
+The group did visual testing to make sure that the design looked good on multiple sizes and operating systems. Below are some screenshots from the different devices: 
+
 <div style="text-align: center">
 <strong>Image 1 and 2: Iphone 5s<strong><br>
 <img src="./images/iphone1.png" height=350/> <img src="./images/iphone2.png" height=350/><br>
@@ -98,6 +98,7 @@ Screenshots from the different devices:
 
 
 ### Manual end-to-end testing
+Below are some scenarios for the manual end-to-end testing. 
 
 #### Scenario 1
 Test that two filters can be used on the data at the same time.
