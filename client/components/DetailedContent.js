@@ -36,8 +36,26 @@ function DetailedContent({
                     <View style={styles.header}>
                         <Text style={styles.modalTitle}>Detailed Information</Text>
                         <TouchableOpacity onPress={() => closeModal()}>
-                            <Ionicons name="md-close" size={vw(6)} color="#5c4d48" style={styles.close} />
+                            <Ionicons name="md-close" size={vw(6)} color="#5c4d48" />
                         </TouchableOpacity>
+                    </View>
+                    <View style={styles.content}>
+                        <Text style={styles.boldText}>Mountain</Text>
+                        <Text style={styles.valueText}>{mountain}</Text>
+                        <Text style={styles.boldText}>Heigth</Text>
+                        <Text style={styles.valueText}>{metres} m</Text>
+                        <Text style={styles.boldText}>Main country</Text>
+                        <Text style={styles.valueText}>{mainCountry}</Text>
+                        <Text style={styles.boldText}>Location and notes</Text>
+                        <Text style={styles.valueText}>{locationAndNotes}</Text>
+                        <Text style={styles.boldText}>Address</Text>
+                        <Text style={styles.valueText}>{formattedAddress}</Text>
+                        <Text style={styles.boldText}>Position</Text>
+                        <Text style={styles.valueText}>latitude: {latitude}, longitude: {longitude}</Text>
+                        <Text style={styles.boldText}>Rating</Text>
+                        <View style={styles.ratingContainer}>
+                            <Text>{startRating}</Text>
+                        </View>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -50,11 +68,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fdebe0',
 	    width: vw(90),
 		maxHeight: vh(90),
-	    borderRadius: 18,
+	    borderRadius: 5,
         marginTop: vh(4),
-    },
-    close: {
-        /*margin: 10,*/
+        padding: 20,
     },
     modalTitle: {
         fontSize: 30,
@@ -66,10 +82,23 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        margin: 20,
-        marginBottom: 30,
+        marginBottom: 20,
+        paddingBottom: 10,
         borderBottomWidth: 1,
         borderColor: '#e0c4ba',
+    },
+    boldText: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: '#5c4d48',
+    },
+    valueText: {
+        fontSize: 20,
+        color: '#5c4d48',
+        marginBottom: 15,
+    },
+    ratingContainer: {
+        marginBottom: 15,
     },
 });
 
