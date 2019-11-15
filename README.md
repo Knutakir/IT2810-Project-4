@@ -74,7 +74,10 @@ SKriv om hva vi testet, flere filter osv.
 
 #### Scenario 3
 1. rate
-2. 
+2. get message
+3. cant rate again
+4. close app
+5. check mountain, cant rate again 
 
 #### Scenario 4
 1. page 3
