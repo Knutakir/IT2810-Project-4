@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
     Picker,
     StyleSheet,
-    Alert,
 } from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setFilteringCountry, setFilteringHeight, setFilteringRating } from '../actions';
 import commonStyles from './commonStyles';
-import Api from '../api/mountain';
 import CustomButton from './CustomButton';
 
 function Filter({
@@ -19,29 +17,12 @@ function Filter({
     onUpdateFilteringHeight,
     onUpdateFilteringRating,
     filteringCountry,
+    filteringHeight,
+    filteringRating,
+    countries,
 }) {
-    const [sliderHeightValues, setSliderHeightValues] = useState([2000, 8848]);
-    const [sliderRatingValues, setSliderRatingValues] = useState([0, 5]);
-    const [firstVisit, setFirstVisit] = useState(true);
-    const [countries, setCountries] = useState([]);
-
-    useEffect(() => {
-        if (!firstVisit) {
-            return;
-        }
-
-        const fetchCountries = async () => {
-            try {
-                const fetchedCountries = await Api.getCountries();
-                setCountries(fetchedCountries);
-                setFirstVisit(false);
-            } catch (error) {
-                Alert.alert('Error', 'Failed to retrieve list of all countries.');
-            }
-        };
-
-        fetchCountries();
-    }, [firstVisit]);
+    const [sliderHeightValues, setSliderHeightValues] = useState(filteringHeight);
+    const [sliderRatingValues, setSliderRatingValues] = useState(filteringRating);
 
     const resetFiltering = () => {
         onUpdateFilteringCountry('All');
@@ -63,7 +44,7 @@ function Filter({
                     >
                         <Picker.Item label="All" value="All" color="rgb(64, 54, 50)" />
                         {countries.map(country => (
-                            <Picker.Item label={country} value={country.toLowerCase()} color="rgb(64, 54, 50)" key={country} />
+                            <Picker.Item label={country} value={country} color="rgb(64, 54, 50)" key={country} />
                         ))}
                     </Picker>
                 </View>
@@ -144,6 +125,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
     filteringCountry: state.filtering.filteringCountry,
+    filteringHeight: state.filtering.filteringHeight,
+    filteringRating: state.filtering.filteringRating,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -157,6 +140,9 @@ Filter.propTypes = {
     onUpdateFilteringHeight: PropTypes.func,
     onUpdateFilteringRating: PropTypes.func,
     filteringCountry: PropTypes.string,
+    filteringHeight: PropTypes.array,
+    filteringRating: PropTypes.array,
+    countries: PropTypes.array,
 };
 
 Filter.defaultProps = {
@@ -164,6 +150,9 @@ Filter.defaultProps = {
     onUpdateFilteringHeight: null,
     onUpdateFilteringRating: null,
     filteringCountry: 'All',
+    filteringHeight: [2000, 8848],
+    filteringRating: [0, 5],
+    countries: [],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
