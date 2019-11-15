@@ -7,7 +7,26 @@ const advancedResultProjection = 'mountain metres latitude longitude';
 
 module.exports.getById = async (res, mountainId) => {
     try {
-        const mountain = await Mountain.findById(mountainId);
+        const tempMountain = await Mountain.findById(mountainId);
+
+        const currentRating = (Number.isNaN(tempMountain.rating.toString())) ? 0 : parseFloat(tempMountain.rating.toString());
+
+        const mountain = {
+            // eslint-disable-next-line no-underscore-dangle
+            id: tempMountain._id,
+            mountain: tempMountain.mountain,
+            metres: tempMountain.metres,
+            metresSearchable: tempMountain.metresSearchable,
+            feet: tempMountain.feet,
+            range: tempMountain.range,
+            locationAndNotes: tempMountain.locationAndNotes,
+            latitude: tempMountain.latitude,
+            longitude: tempMountain.longitude,
+            mainCountry: tempMountain.mainCountry,
+            formattedAddress: tempMountain.formattedAddress,
+            rating: currentRating,
+            votes: tempMountain.votes,
+        };
 
         return res.send({message: MESSAGE.OK, mountain});
     } catch (error) {
@@ -41,7 +60,7 @@ module.exports.searchMountain = async (res, query, pageNumber, sortingObject, fi
     const start = (pageNumber - 1) * PAGE_SIZE;
 
     // Find mountains with fields containing the query for `mountain`, `metresSearchable` and `mainCountry`
-    const mountains = await Mountain.find({
+    const tempMountains = await Mountain.find({
         $and: [
             {
                 $or: [
@@ -56,6 +75,20 @@ module.exports.searchMountain = async (res, query, pageNumber, sortingObject, fi
         .sort(sortingObject)
         .skip(start)
         .limit(PAGE_SIZE);
+
+    const mountains = tempMountains.map(currentMountain => {
+        // Check if the mountains rating is a number
+        const currentRating = (Number.isNaN(currentMountain.rating.toString())) ? 0 : parseFloat(currentMountain.rating.toString());
+
+        return {
+            // eslint-disable-next-line no-underscore-dangle
+            id: currentMountain._id,
+            mountain: currentMountain.mountain,
+            metres: currentMountain.metres,
+            mainCountry: currentMountain.mainCountry,
+            rating: currentRating,
+        };
+    });
 
     const totalMountainCount = await Mountain.countDocuments({
         $and: [

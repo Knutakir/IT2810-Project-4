@@ -1,4 +1,5 @@
 # Project 4
+> ***NOTE***: Due to a [bug](https://github.com/facebook/metro/issues/453) in a dependency of `react-native` this project does not run on `Node.js` versions above `v12.10.0`
 
 Mountain Finder is a website with over 1000 mountains with height over 2000 meters. You can search, sort and filter the mountains, and by clicking a specific mountain in the list, a modal appears with detailed mountain data. In this modal, you can rate the chosen mountain from 1-5, and see the total score. The mountain is rated by clicking the number of stars wanted. You can only rate once for every phone (or download instance). 
 
