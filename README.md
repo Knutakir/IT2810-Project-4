@@ -33,6 +33,15 @@ structure -> only one file
 
 
 ## Expo
+Expo is used for this project to make the development of the React Native applicaton fast and easy. Expo is a a platform for making universal applications with React Native that runs on iOS and Android. It has a lot of useful tools that is built around React Native that we used in this project, such as the `expo-cli` and `@expo/vector-icons`. The group used the expo CLI for installing, initializing and running the project:
+```sh
+$ npm install --global expo-cli
+$ expo init <project-name>
+$ cd <project-name>
+$ expo start
+```
+The CLI worked as a provider of the mobile client by using a mobile client of expo on the phones and either scanning a QR-code (which directed to a URL) or by manually insering a URL in the web browser. This started the downloading of the application to the phone and running it afterwards.
+The command line interface also provided fast upload of the application after every safe of source files in the project to the devices.
 
 ## Redux
 
