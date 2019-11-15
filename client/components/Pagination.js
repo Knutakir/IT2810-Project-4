@@ -8,10 +8,11 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import commonStyles from './commonStyles';
+import CustomButton from './CustomButton';
 
 // eslint-disable-next-line react/prop-types
 function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) {
-    currentPageNumber = 2;
+    currentPageNumber = 4;
     totalPageNumber = 6;
     const back = () => {
         if (currentPageNumber !== 1) {
@@ -31,13 +32,17 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
     return (
         <View style={styles.pagination}>
             { currentPageNumber !== 1 && (
-                <TouchableOpacity style={commonStyles.shadow}>
-                    <Ionicons name="md-arrow-round-back" size={25} color="#403632" style={styles.star} />
+                <TouchableOpacity>
+                    <View style={[commonStyles.shadow, styles.button]}>
+                        <Ionicons name="md-arrow-round-back" size={25} color="#403632" style={styles.star} />
+                    </View>
                 </TouchableOpacity>
             )}
             { currentPageNumber > 1 && (
-                <TouchableOpacity style={commonStyles.shadow}>
-                    <Text>1</Text>
+                <TouchableOpacity>
+                    <View style={[commonStyles.shadow, styles.button]}>
+                        <Text>1</Text>
+                    </View>
                 </TouchableOpacity>
             )}
             { currentPageNumber > 2 && (
@@ -45,7 +50,7 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
                     ...
                 </Text>
             )}
-            <View>
+            <View style={[commonStyles.shadow, styles.button]}>
                 <Text>
                     {currentPageNumber}
                 </Text>
@@ -57,12 +62,16 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
             )}
             { currentPageNumber < totalPageNumber && (
                 <TouchableOpacity style={commonStyles.shadow}>
-                    <Text>{totalPageNumber}</Text>
+                    <View style={[commonStyles.shadow, styles.button]}>
+                        <Text>{totalPageNumber}</Text>
+                    </View>
                 </TouchableOpacity>
             )}
             { currentPageNumber !== totalPageNumber && (
-                <TouchableOpacity style={commonStyles.shadow}>
-                    <Ionicons name="md-arrow-round-forward" size={25} color="#403632" style={styles.star} />
+                <TouchableOpacity>
+                    <View style={[commonStyles.shadow, styles.button]}>
+                        <Ionicons name="md-arrow-round-forward" size={25} color="#403632" style={styles.star} />
+                    </View>
                 </TouchableOpacity>
             )}
         </View>
@@ -71,6 +80,12 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
 
 const styles = StyleSheet.create({
     pagination: {
+    },
+    button: {
+        backgroundColor: '#f0d5c9',
+        borderRadius: 5,
+        color: 'rgb(64, 54, 50)',
+        padding: 10,
     },
 });
 
