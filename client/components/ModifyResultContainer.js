@@ -18,7 +18,7 @@ function ModifyResultContainer({children, type}) {
                 <View style={styles.textView}>
                     <Text style={[styles.containerText, commonStyles.text]}>{`${type} results`}</Text>
                     <Ionicons
-                        name={hidden ? ('md-arrow-dropup') : ('md-arrow-dropdown')}
+                        name={hidden ? ('md-arrow-dropdown') : ('md-arrow-dropup')}
                         size={24}
                         color="#d1a797"
                     />
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         padding: 3,
     },
     button: {
-        padding: 3,
+        padding: 6,
     },
     textView: {
         flexDirection: 'row',

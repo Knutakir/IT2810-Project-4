@@ -4,6 +4,7 @@ import {
     Text,
     Picker,
     StyleSheet,
+    Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
@@ -24,6 +25,7 @@ function Sort({
                 <Picker
                     selectedValue={sortingType}
                     style={styles.picker}
+                    itemStyle={styles.pickerItem}
                     onValueChange={itemValue => onUpdateSortingType(itemValue)}
                 >
                     <Picker.Item label="Mountain" value="name" color="rgb(64, 54, 50)" />
@@ -55,9 +57,12 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     picker: {
-        height: 50,
+        height: Platform.OS === 'ios' ? 150 : 50,
         width: 150,
         color: 'rgb(64, 54, 50)',
+    },
+    pickerItem: {
+        height: Platform.OS === 'ios' ? 150 : 50,
     },
     sortingOrder: {
         fontSize: 25,
