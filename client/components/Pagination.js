@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import commonStyles from './commonStyles';
 import CustomButton from './CustomButton';
+import { vw } from 'react-native-expo-viewport-units';
 
 // eslint-disable-next-line react/prop-types
 function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) {
@@ -32,45 +33,49 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
     return (
         <View style={styles.pagination}>
             { currentPageNumber !== 1 && (
-                <TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.7}>
                     <View style={[commonStyles.shadow, styles.button]}>
-                        <Ionicons name="md-arrow-round-back" size={25} color="#403632" style={styles.star} />
+                        <Ionicons name="md-arrow-round-back" size={35} color="#403632" style={styles.icon} />
                     </View>
                 </TouchableOpacity>
             )}
             { currentPageNumber > 1 && (
-                <TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.7}>
                     <View style={[commonStyles.shadow, styles.button]}>
-                        <Text>1</Text>
+                        <Text style={styles.text}>
+                            1
+                        </Text>
                     </View>
                 </TouchableOpacity>
             )}
             { currentPageNumber > 2 && (
-                <Text>
+                <Text style={styles.text}>
                     ...
                 </Text>
             )}
             <View style={[commonStyles.shadow, styles.button]}>
-                <Text>
+                <Text style={styles.text}>
                     {currentPageNumber}
                 </Text>
             </View>
             { currentPageNumber < totalPageNumber - 1 && (
-                <Text>
+                <Text style={styles.text}>
                     ...
                 </Text>
             )}
             { currentPageNumber < totalPageNumber && (
-                <TouchableOpacity style={commonStyles.shadow}>
+                <TouchableOpacity activeOpacity={0.7}>
                     <View style={[commonStyles.shadow, styles.button]}>
-                        <Text>{totalPageNumber}</Text>
+                        <Text style={styles.text}>
+                            {totalPageNumber}
+                        </Text>
                     </View>
                 </TouchableOpacity>
             )}
             { currentPageNumber !== totalPageNumber && (
-                <TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.7}>
                     <View style={[commonStyles.shadow, styles.button]}>
-                        <Ionicons name="md-arrow-round-forward" size={25} color="#403632" style={styles.star} />
+                        <Ionicons name="md-arrow-round-forward" size={35} color="#403632" style={styles.icon} />
                     </View>
                 </TouchableOpacity>
             )}
@@ -80,13 +85,26 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
 
 const styles = StyleSheet.create({
     pagination: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        minWidth: vw(50),
     },
     button: {
         backgroundColor: '#f0d5c9',
         borderRadius: 5,
         color: 'rgb(64, 54, 50)',
         padding: 10,
+        width: 50,
     },
+    text: {
+        fontSize: 26,
+        textAlign: 'center',
+    },
+    icon: {
+        textAlign: 'center',
+    }
 });
 
 const mapStateToProps = state => ({
