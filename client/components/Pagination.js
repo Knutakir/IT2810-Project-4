@@ -8,24 +8,24 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { vw } from 'react-native-expo-viewport-units';
+import PropTypes from 'prop-types';
 import commonStyles from './commonStyles';
+import { setSelectedPage } from '../actions';
 
-// eslint-disable-next-line react/prop-types
 function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) {
-    currentPageNumber = 44;
-    totalPageNumber = 60;
     const back = () => {
         if (currentPageNumber !== 1) {
-            //onUpdateSelectedPage(currentPageNumber - 1);
+            onUpdateSelectedPage(currentPageNumber - 1);
         }
     };
+
     const forward = () => {
         if (currentPageNumber !== totalPageNumber) {
-            //onUpdateSelectedPage(currentPageNumber + 1);
+            onUpdateSelectedPage(currentPageNumber + 1);
         }
     };
     const clickNumber = number => {
-        //onUpdateSelectedPage(number);
+        onUpdateSelectedPage(number);
     };
 
     /* Creates the pagination */
@@ -124,16 +124,28 @@ const styles = StyleSheet.create({
     icon: {
         textAlign: 'center',
         textAlignVertical: 'center',
-    }
+    },
 });
 
 const mapStateToProps = state => ({
-    //currentPageNumber: state.page.pageNumber,
-    //totalPageNumber: state.page.totalPageNumber,
+    currentPageNumber: state.page.pageNumber,
+    totalPageNumber: state.page.totalPageNumber,
 });
 
 const mapDispatchToProps = dispatch => ({
-    //onUpdateSelectedPage: pageNumber => dispatch(setSelectedPage(pageNumber)),
+    onUpdateSelectedPage: pageNumber => dispatch(setSelectedPage(pageNumber)),
 });
+
+Pagination.propTypes = {
+    onUpdateSelectedPage: PropTypes.func,
+    currentPageNumber: PropTypes.number,
+    totalPageNumber: PropTypes.number,
+};
+
+Pagination.defaultProps = {
+    onUpdateSelectedPage: null,
+    currentPageNumber: 1,
+    totalPageNumber: 2,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

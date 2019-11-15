@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { setFilteringCountry, setFilteringHeight, setFilteringRating } from '../actions';
 import commonStyles from './commonStyles';
 import CustomButton from './CustomButton';
+import { vw } from 'react-native-expo-viewport-units';
 
 function Filter({
     onUpdateFilteringCountry,
@@ -35,6 +36,7 @@ function Filter({
 
     return (
         <View style={styles.outerView}>
+            <CustomButton text="Reset filters" onPress={() => resetFiltering()} />
             <View style={styles.topView}>
                 <Text style={commonStyles.text}>Filter by country:</Text>
                 <View style={[styles.pickerView, commonStyles.shadow]}>
@@ -50,12 +52,12 @@ function Filter({
                         ))}
                     </Picker>
                 </View>
-                <CustomButton text="Reset filters" onPress={() => resetFiltering()} />
             </View>
             <Text style={commonStyles.text}>Filter by mountain height:</Text>
             <View style={styles.sliderView}>
                 <Text style={[styles.sliderText, commonStyles.text]}>{sliderHeightValues[0]}</Text>
                 <MultiSlider
+                    sliderLength={vw(60)}
                     markerStyle={styles.sliderMarker}
                     unselectedStyle={styles.sliderUnselected}
                     selectedStyle={styles.sliderSelected}
@@ -72,6 +74,7 @@ function Filter({
             <View style={styles.sliderView}>
                 <Text style={[styles.sliderText, commonStyles.text]}>{sliderRatingValues[0]}</Text>
                 <MultiSlider
+                    sliderLength={vw(70)}
                     markerStyle={styles.sliderMarker}
                     unselectedStyle={styles.sliderUnselected}
                     selectedStyle={styles.sliderSelected}
@@ -91,6 +94,7 @@ const styles = StyleSheet.create({
     outerView: {
         flexDirection: 'column',
         alignItems: 'center',
+        padding: 10,
     },
     topView: {
         flexDirection: 'row',

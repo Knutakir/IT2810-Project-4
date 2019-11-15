@@ -12,10 +12,10 @@ import { vw } from 'react-native-expo-viewport-units';
 import ListItem from './ListItem';
 import DetailedContent from './DetailedContent';
 import Api from '../api/mountain';
-import { setPerformingSearch } from '../actions';
+import { setPerformingSearch, setTotalPage, setSelectedPage } from '../actions';
 
 function List({
-    // TODO: currentPageNumber,
+    currentPageNumber,
     sortingType,
     sortingOrder,
     filteringCountry,
@@ -24,7 +24,8 @@ function List({
     searchValue,
     performingSearch,
     onUpdatePerformingSearch,
-    // TODO: onUpdateTotalPageNumber,
+    onUpdateTotalPageNumber,
+    onUpdateSelectedPage,
 }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [mountains, setMountains] = useState([]);
@@ -61,10 +62,9 @@ function List({
         const filteringObject = {country: filteringCountry, height: filteringHeight, rating: filteringRating};
 
         try {
-            // TODO: implement page number __
-            const fetchedMountains = await Api.searchMountains(searchValue, 1, sortingObject, filteringObject);
+            const fetchedMountains = await Api.searchMountains(searchValue, currentPageNumber, sortingObject, filteringObject);
 
-            // TODO: onUpdateTotalPageNumber(fetchedMountains.totalPageNumber);
+            onUpdateTotalPageNumber(fetchedMountains.totalPageNumber);
             setMountains(fetchedMountains.mountains);
             onUpdatePerformingSearch(false);
         } catch (error) {
@@ -74,8 +74,16 @@ function List({
 
     // Refresh the list after changing of search, filtering and soring
     useEffect(() => {
+        // Set current page to first page
+        onUpdateSelectedPage(1);
+
         searchMountains();
     }, [sortingType, sortingOrder, filteringCountry, filteringHeight, filteringRating, searchValue]);
+
+    // Refresh the current page number
+    useEffect(() => {
+        searchMountains();
+    }, [currentPageNumber]);
 
     // Refresh the list after triggering refresh
     useEffect(() => {
@@ -133,7 +141,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    // TODO: currentPageNumber: state.page.pageNumber,
+    currentPageNumber: state.page.pageNumber,
     sortingType: state.sorting.sortingType,
     sortingOrder: state.sorting.sortingOrder,
     filteringCountry: state.filtering.filteringCountry,
@@ -145,9 +153,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onUpdatePerformingSearch: performingSearch => dispatch(setPerformingSearch(performingSearch)),
+    onUpdateTotalPageNumber: totalPageNumber => dispatch(setTotalPage(totalPageNumber)),
+    onUpdateSelectedPage: pageNumber => dispatch(setSelectedPage(pageNumber)),
 });
 
 List.propTypes = {
+    currentPageNumber: PropTypes.number,
     sortingType: PropTypes.string,
     sortingOrder: PropTypes.number,
     filteringCountry: PropTypes.string,
@@ -156,9 +167,12 @@ List.propTypes = {
     searchValue: PropTypes.string,
     performingSearch: PropTypes.bool,
     onUpdatePerformingSearch: PropTypes.func,
+    onUpdateTotalPageNumber: PropTypes.func,
+    onUpdateSelectedPage: PropTypes.func,
 };
 
 List.defaultProps = {
+    currentPageNumber: 1,
     sortingType: 'height',
     sortingOrder: -1,
     filteringCountry: 'All',
@@ -167,6 +181,8 @@ List.defaultProps = {
     searchValue: '',
     performingSearch: false,
     onUpdatePerformingSearch: null,
+    onUpdateTotalPageNumber: null,
+    onUpdateSelectedPage: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);
