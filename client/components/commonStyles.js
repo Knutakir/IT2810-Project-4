@@ -4,6 +4,9 @@ const commonStyles = StyleSheet.create({
     text: {
         color: '#d1a797',
     },
+    background: {
+        color: '#5c4d48',
+    },
     shadow: {
         shadowColor: 'black',
         shadowOffset: { width: 3, height: 3 },

@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import {
     View,
+    Modal,
     StyleSheet,
+    TouchableOpacity,
     Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { vw } from 'react-native-expo-viewport-units';
+import { Ionicons } from '@expo/vector-icons';
+import { vw, vh } from 'react-native-expo-viewport-units';
 import ListItem from './ListItem';
+import DetailedContent from './DetailedContent';
 import Api from '../api/mountain';
 
 function List({
@@ -20,10 +24,11 @@ function List({
     searchValue,
     // TODO: onUpdateTotalPageNumber,
 }) {
+    const [modalVisible, setModalVisible] = useState(false);
     const [mountains, setMountains] = useState([]);
 
     const clickListItem = (country) => {
-        alert(country);
+        setModalVisible(true);
     };
 
     useEffect(() => {
@@ -46,17 +51,26 @@ function List({
     }, [sortingType, sortingOrder, filteringCountry, filteringHeight, filteringRating, searchValue]);
 
     return (
-        <View style={styles.list}>
-            {mountains.map(mountain => (
-                <ListItem
-                    key={mountain.id}
-                    name={mountain.mountain}
-                    country={mountain.mainCountry}
-                    height={mountain.metres}
-                    rating={mountain.rating}
-                    clickItem={() => clickListItem(mountain.mountain)}
-                />
-            ))}
+        <View>
+            <View style={styles.list}>
+                {mountains.map(mountain => (
+                    <ListItem
+                        key={mountain.id}
+                        name={mountain.mountain}
+                        country={mountain.mainCountry}
+                        height={mountain.metres}
+                        rating={mountain.rating}
+                        clickItem={() => clickListItem(mountain.mountain)}
+                    />
+                ))}            
+            </View>
+            { /* Solution for clicking outside of modal to close (in List.js and DetailedContent.js) found here:
+            https://stackoverflow.com/questions/40483034/close-react-native-modal-by-clicking-on-overlay */}
+            <Modal animationType="slide" transparent visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
+                <TouchableOpacity style={styles.modalContainer} activeOpacity={1} onPressOut={() => setModalVisible(false)}>
+                    <DetailedContent closeModal={() => setModalVisible(false)} />
+                </TouchableOpacity>
+            </Modal>
         </View>
     );
 }
@@ -64,6 +78,11 @@ function List({
 const styles = StyleSheet.create({
     list: {
         width: vw(90),
+    },
+    modalContainer: {
+        flex: 1,
+		justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 
