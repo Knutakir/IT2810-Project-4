@@ -24,13 +24,11 @@ $ npm start
 ## React Native and reuse code 
 React Native was used for this project. To reuse code from the previous project which used React, some changes had to be done. The components from React and React Native does not only have different names, but often different functionality and/or styling too. 
 
-View div
+An example of elements with very similar functionality are `div` and `View`. There exists a button element in React Native as in web JS, but the touchable elements like `TouchableOpacity` are much easier to style than the React Native `Button`.
 
-TouchableOpacity button
+A major difference between React (and normal web development) and React Native is that `StyleSheet` objects are used instead of CSS files. When no CSS file is needed, it lead to the group only using one JS file for each component. 
 
-css stylesheet
-structure -> only one file
-
+Other than different components/elements, there were much of the logic that could be reused. The group used hooks and Redux almost without changes from the previous project. 
 
 ## Expo
 Expo is used for this project to make the development of the React Native applicaton fast and easy. Expo is a a platform for making universal applications with React Native that runs on iOS and Android. It has a lot of useful tools that is built around React Native that we used in this project, such as the `expo-cli` and `@expo/vector-icons`. The group used the expo CLI for installing, initializing and running the project:
