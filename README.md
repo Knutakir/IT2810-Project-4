@@ -4,7 +4,7 @@ Mountain Finder is a website with over 1000 mountains with height over 2000 mete
 
 ## Install and Run
 
-The client is set up to use the server on the VM, to use your own server with database ...
+The client is set up to use the server on the VM, to use your own server with database your own database one needs to follow the steps below for installing and running the server. One also needs to ensure [`MongoDB`](https://www.mongodb.com/) is installed on the machine and the correct credentials/port number are provided in the [server/index.js](server/index.js) and the [server/initialize-db.js](server/initialize-db.js) when connnecting to the database. On the client side one needs to ensure one is on the same network as the server (this is valid for only using the client out of the box aswell). If the user wants to use a own server one needs to change the remote base address at the top in the [client/api/mountain.js](client/api/mountain.js) file in the client code. For installing and running the client without modifications just follow the steps below.
 
 ### Server
 ```sh
