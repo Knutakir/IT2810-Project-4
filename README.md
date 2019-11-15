@@ -68,39 +68,62 @@ Some screenshots:
 
 
 ### Manual end-to-end testing
-SKriv om hva vi testet, flere filter osv. 
+SKriv om hva vi testet, flere filter osv.
+Tested on both iOS and Android.  
 
 
 #### Scenario 1
-1. Chose filtering option ... 
-2. Chose filtering option ...
-3. Expect that the list will show ... first
+1. Chose filtering option country: `Australia`
+2. Chose filtering option mountain height from `2000`-4060:
+3. Expect that the list will show `Mount Walter` first.
 
 #### Scenario 2
 1. Sort by height 
-2. Click arrow
-3. Expect .. to 
-4. Filter by only mountains over 8...
-5. expect 3 results.. 
+2. Click arrow to point up
+3. Expect `Mount Le Conte` to be at the top of the list (with 2010 m) 
+4. Filter by only mountains over 8500 m.
+5. expect 4 results where `Lhotse` is at top and `Mount Everest` (highest mountain) is at the bottom of the list.  
 
 #### Scenario 3
-1. rate
-2. get message
-3. cant rate again
-4. close app
-5. check mountain, cant rate again 
+1. Click an unrated mountain to get detailed information.
+2. Click at the number of stars wanted to rate
+3. Click `Yes` when getting the alert notification.
+4. Expect message `You have rated this mountain _ stars!` to appear above the rating. 
+5. Click a star again. 
+6. Expect to get alert `You have already voted for this mountain!`.
+7. Close and reopen the app.
+8. Expect that the rating is saved for the same mountain. 
 
 #### Scenario 4
-1. page 3
-2. search
-3. Expect to be on page 1
+1. Click an unrated mountain to get detailed information.
+2. Click at the number of stars wanted to rate. 
+3. Click `Cancel` when getting the alert notification.
+4. Expect no rating to be saved. 
 
 #### Scenario 5
-1. search
-2. bla ned
-3. Expect to show .. pages
-4. click last page
-5. expect to see .. as last mountains
+Test that the current page number resets.
+1. Go to page number 3.
+2. Search for `F`.
+3. Expect to be on page number 1.
+
+#### Scenario 6
+Test 
+1. Search for `H`.
+2. Scroll to the bottom.
+3. Expect to see maximum page as 21.
+4. Click on page 21.
+5. Expect to see `Mount Heng (Shanxi)` as last the mountain.
+
+#### Scenario 7
+Test that the application returns no mountains and a message when there are no results.
+1. Search for `Donut`. None of the mountains are called that. 
+2. Expect to get message `No results!`
+
+#### Scenario 8
+Test country searching. 
+1. Search for `Norway`.
+2. Expect to get three mountains as result.
+
 
 ### Tests
 To run server tests from the previous project run these commands: 
