@@ -63,7 +63,7 @@ function Filter({
                     >
                         <Picker.Item label="All" value="All" color="rgb(64, 54, 50)" />
                         {countries.map(country => (
-                            <Picker.Item label={country} value={country.toLowerCase()} color="rgb(64, 54, 50)" key={country} />
+                            <Picker.Item label={country} value={country} color="rgb(64, 54, 50)" key={country} />
                         ))}
                     </Picker>
                 </View>

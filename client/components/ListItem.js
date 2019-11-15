@@ -25,7 +25,9 @@ export default function ListItem({
                 <View>
                     <View style={styles.rating}>
                         <Ionicons name="md-star" size={25} color="#403632" style={styles.star} />
-                        <Text style={styles.rightText}>{rating}</Text>
+                        <Text style={styles.rightText}>
+                            {parseFloat(rating).toFixed(2)}
+                        </Text>
                     </View>
                     <Text style={styles.rightText}>{height} m</Text>
                 </View>
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
 });
 
 /*
+    TODO:
     box-shadow: 3px 3px 8px 1px rgba(0,0,0,0.5);
 */
 
@@ -83,7 +86,7 @@ ListItem.propTypes = {
     name: PropTypes.string,
     country: PropTypes.string,
     height: PropTypes.number,
-    rating: PropTypes.string,
+    rating: PropTypes.number,
     clickItem: PropTypes.func.isRequired,
 };
 
@@ -91,5 +94,5 @@ ListItem.defaultProps = {
     name: '',
     country: '',
     height: 0,
-    rating: '0',
+    rating: 0,
 };
