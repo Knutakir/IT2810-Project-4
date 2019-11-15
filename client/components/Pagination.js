@@ -35,59 +35,66 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
 
     /* Creates the pagination */
     return (
-        <View style={styles.pagination}>
-            { currentPageNumber !== 1 && (
-                <TouchableOpacity activeOpacity={0.7} onPress={() => back()}>
-                    <View style={[commonStyles.shadow, styles.button]}>
-                        <Ionicons name="md-arrow-round-back" size={38} color="#403632" style={styles.icon} />
-                    </View>
-                </TouchableOpacity>
-            )}
-            { currentPageNumber > 1 && (
-                <TouchableOpacity activeOpacity={0.7} onPress={() => clickNumber(1)}>
-                    <View style={[commonStyles.shadow, styles.button]}>
-                        <Text style={styles.text}>
-                            1
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-            )}
-            { currentPageNumber > 2 && (
-                <Text style={styles.dots}>
-                    ...
-                </Text>
-            )}
-            <View style={[commonStyles.shadow, styles.button, styles.current]}>
-                <Text style={styles.text}>
-                    {currentPageNumber}
-                </Text>
+        <View style={styles.outerView}>
+            <View style={styles.pagination}>
+                { currentPageNumber !== 1 && (
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => back()}>
+                        <View style={[commonStyles.shadow, styles.button]}>
+                            <Ionicons name="md-arrow-round-back" size={38} color="#403632" style={styles.icon} />
+                        </View>
+                    </TouchableOpacity>
+                )}
+                { currentPageNumber > 1 && (
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => clickNumber(1)}>
+                        <View style={[commonStyles.shadow, styles.button]}>
+                            <Text style={styles.text}>
+                                1
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                )}
+                { currentPageNumber > 2 && (
+                    <Text style={styles.dots}>
+                        ...
+                    </Text>
+                )}
+                <View style={[commonStyles.shadow, styles.button, styles.current]}>
+                    <Text style={styles.text}>
+                        {currentPageNumber}
+                    </Text>
+                </View>
+                { currentPageNumber < totalPageNumber - 1 && (
+                    <Text style={styles.dots}>
+                        ...
+                    </Text>
+                )}
+                { currentPageNumber < totalPageNumber && (
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => clickNumber(totalPageNumber)}>
+                        <View style={[commonStyles.shadow, styles.button]}>
+                            <Text style={styles.text}>
+                                {totalPageNumber}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                )}
+                { currentPageNumber !== totalPageNumber && (
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => forward()}>
+                        <View style={[commonStyles.shadow, styles.button]}>
+                            <Ionicons name="md-arrow-round-forward" size={38} color="#403632" style={styles.icon} />
+                        </View>
+                    </TouchableOpacity>
+                )}
             </View>
-            { currentPageNumber < totalPageNumber - 1 && (
-                <Text style={styles.dots}>
-                    ...
-                </Text>
-            )}
-            { currentPageNumber < totalPageNumber && (
-                <TouchableOpacity activeOpacity={0.7} onPress={() => clickNumber(totalPageNumber)}>
-                    <View style={[commonStyles.shadow, styles.button]}>
-                        <Text style={styles.text}>
-                            {totalPageNumber}
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-            )}
-            { currentPageNumber !== totalPageNumber && (
-                <TouchableOpacity activeOpacity={0.7} onPress={() => forward()}>
-                    <View style={[commonStyles.shadow, styles.button]}>
-                        <Ionicons name="md-arrow-round-forward" size={38} color="#403632" style={styles.icon} />
-                    </View>
-                </TouchableOpacity>
-            )}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    outerView: {
+        display: 'flex',
+        justifyContent: 'center',
+        width: vw(90),
+    },
     pagination: {
         display: 'flex',
         flexDirection: 'row',
