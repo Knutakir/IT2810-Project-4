@@ -3,7 +3,6 @@
 Mountain Finder is a website with over 1000 mountains with height over 2000 meters. You can search, sort and filter the mountains, and by clicking a specific mountain in the list, a modal appears with detailed mountain data. In this modal, you can rate the chosen mountain from 1-5, and see the total score. The mountain is rated by clicking the number of stars wanted. You can only rate once for every phone (or download instance). 
 
 ## Install and Run
-
 The client is set up to use the server on the VM, to use your own server with database your own database one needs to follow the steps below for installing and running the server. One also needs to ensure [`MongoDB`](https://www.mongodb.com/) is installed on the machine and the correct credentials/port number are provided in the [server/index.js](server/index.js) and the [server/initialize-db.js](server/initialize-db.js) when connnecting to the database. On the client side one needs to ensure one is on the same network as the server (this is valid for only using the client out of the box aswell). If the user wants to use a own server one needs to change the remote base address at the top in the [client/api/mountain.js](client/api/mountain.js) file in the client code. For installing and running the client without modifications just follow the steps below.
 
 ### Server
@@ -42,6 +41,7 @@ The CLI worked as a provider of the mobile client by using a mobile client of ex
 The command line interface also provided fast upload of the application after every safe of source files in the project to the devices.
 
 ## Redux
+`Redux` is used in this project for easy managing the global states needed in the components. This is very useful and prevents "sending" up and down states in the component hierarchy. Redux was used mostly the same way that the group used it for the previous project, but with some modifications to make it better. Redux was used like the previous project by using reducers and actions. For ensuring that the group did not type the names of the global state actions wrong, a [file](client/actionTypes.js) was used for creating the names as constants. Redux was used for storing states about the search value, sorting, pagination, etc.
 
 ## AsyncStorage
 In this project the group used `AsyncStorage` for storing the if the user has rated a mountain in the mobile application. AsyncStorage made it possible for persistance data to be stored on the device from one to the next run. `AsyncStorage` works similiar to `LocalStorage` for the web, but is asynchronous and returns a `Promise`. The feature we implemented is available after searching/filtering/sorting and selecting a mountain to open the modal with the given mountain. Then on the bottom of the modal there is stars that can be used for rate the selected mountain. The user of the application is only available to rate a mountain once and this is stored in the AsyncStorage and checked every time a mountain is selected. If a selected mountain is already rated by the user of the application, then a message appears to the user over the stars and if the user presses the stars. 
