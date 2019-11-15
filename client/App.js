@@ -20,6 +20,7 @@ import List from './components/List';
 import Filter from './components/Filter';
 import ModifyResultContainer from './components/ModifyResultContainer';
 import Rating from './components/Rating';
+import Api from './api/mountain';
 
 const store = createStore(reducer);
 const windowSize = Dimensions.get('window');
@@ -28,13 +29,23 @@ const background = '#5c4d48';
 export default function App() {
     const [firstLoad, setFirstLoad] = useState(true);
     const [rating, setRating] = useState(1);
+    const [countries, setCountries] = useState([]);
 
     useEffect(() => {
         const loadFont = async () => {
-            await Font.loadAsync({
-                'dancing-script': require('./assets/fonts/Dancing_Script/DancingScript-Bold.ttf'),
-            });
-            setFirstLoad(false);
+            try {
+                // Load font
+                await Font.loadAsync({
+                    'dancing-script': require('./assets/fonts/Dancing_Script/DancingScript-Bold.ttf'),
+                });
+
+                // Fetch mountains from the server
+                const fetchedCountries = await Api.getCountries();
+                setCountries(fetchedCountries);
+                setFirstLoad(false);
+            } catch (error) {
+                Alert.alert('Error', 'Failed to retrieve list of all countries.');
+            }
         };
 
         if (firstLoad) {
@@ -75,7 +86,7 @@ export default function App() {
                                 <Sort />
                             </ModifyResultContainer>
                             <ModifyResultContainer type="Filter">
-                                <Filter />
+                                <Filter countries={countries} />
                             </ModifyResultContainer>
                             <Rating rating={rating} votes={rating} onSetRating={value => onStarRatingPressed(value)} />
                             <Button title="-" onPress={() => setRating(rating - 1)} />
