@@ -16,6 +16,7 @@ import { vw, vh } from 'react-native-expo-viewport-units';
 import Rating from './Rating';
 import Api from '../api/mountain';
 import { setPerformingSearch } from '../actions';
+import mountainStorage from '../mountainStorage';
 
 function DetailedContent({
     mountainId,
@@ -30,6 +31,8 @@ function DetailedContent({
     startVotes,
     onUpdatePerformingSearch,
     closeModal,
+    selectedRating,
+    onSetRating,
 }) {
     const [rating, setRating] = useState(startRating);
     const [votes, setVotes] = useState(startVotes);
@@ -54,24 +57,34 @@ function DetailedContent({
         onUpdatePerformingSearch(true);
     };
 
-    const onStarRatingPressed = newRating => {
-        // TODO: check if the user have rated this mountain before
-        // => if the user has rated => display "Already rated ..." message
+    const onStarRatingPressed = async newRating => {
+        // Check if the user have rated this mountain before
+        const isMountainRated = await mountainStorage.hasVotedForMountain(mountainId);
+        if (isMountainRated > 0) {
+            Alert.alert('Error', 'You have already voted for this mountain!');
+        } else {
+            Alert.alert(
+                `Rate '${mountain}'?`,
+                `Do you want to rate '${mountain}' ${newRating} star${(newRating > 1) ? 's' : ''}?`,
+                [
+                    {text: 'Cancel'},
+                    {
+                        text: 'Yes',
+                        onPress: () => {
+                            // Save the rating on the server
+                            giveRating(newRating);
 
-        Alert.alert(
-            `Rate '${mountain}'?`,
-            `Do you want to rate '${mountain}' ${newRating} star${(newRating > 1) ? 's' : ''}?`,
-            [
-                {text: 'Cancel'},
-                {
-                    text: 'Yes',
-                    onPress: () => {
-                        // TODO: save that the user has rated for this mountain in the async storage
-                        giveRating(newRating);
+                            // Save that the user has rated for this mountain in the async storage
+                            mountainStorage.voteForMountain(mountainId, newRating);
+
+                            if (onSetRating) {
+                                onSetRating(newRating);
+                            }
+                        },
                     },
-                },
-            ],
-        );
+                ],
+            );
+        }
     };
 
     return (
@@ -102,6 +115,9 @@ function DetailedContent({
                         </TouchableOpacity>
                         <Text style={styles.boldText}>Rating</Text>
                         <View style={styles.ratingContainer}>
+                            {(selectedRating > 0) && (
+                                <Text style={styles.valueText}>You have rated this mountain {selectedRating} stars!</Text>
+                            )}
                             <Rating rating={rating} votes={votes} onSetRating={value => onStarRatingPressed(value)} />
                         </View>
                     </View>
@@ -172,6 +188,8 @@ DetailedContent.propTypes = {
     startVotes: PropTypes.number,
     onUpdatePerformingSearch: PropTypes.func,
     closeModal: PropTypes.func,
+    selectedRating: PropTypes.number,
+    onSetRating: PropTypes.func,
 };
 
 DetailedContent.defaultProps = {
@@ -187,6 +205,8 @@ DetailedContent.defaultProps = {
     startVotes: 0,
     onUpdatePerformingSearch: null,
     closeModal: null,
+    selectedRating: 0,
+    onSetRating: null,
 };
 
 const mapStateToProps = state => ({

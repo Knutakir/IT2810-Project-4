@@ -13,6 +13,7 @@ import ListItem from './ListItem';
 import DetailedContent from './DetailedContent';
 import Api from '../api/mountain';
 import { setPerformingSearch, setTotalPage, setSelectedPage } from '../actions';
+import mountainStorage from '../mountainStorage';
 
 function List({
     currentPageNumber,
@@ -40,6 +41,7 @@ function List({
         rating: 0,
         votes: 0,
     });
+    const [selectedRating, setSelectedRating] = useState(0);
 
     const pressedListItem = pressedMountain => {
         const fetchSingleMountain = async mountainId => {
@@ -47,10 +49,16 @@ function List({
             setSelectedMountain(fetchedMountain);
         };
 
+        const checkMountainRated = async () => {
+            const isMountainRated = await mountainStorage.hasVotedForMountain(mountainId);
+            setSelectedRating(isMountainRated);
+        };
+
         const mountainId = pressedMountain.id;
 
         if (mountainId) {
             fetchSingleMountain(mountainId);
+            checkMountainRated();
         }
 
         // Show the modal
@@ -122,6 +130,8 @@ function List({
                         startRating={selectedMountain.rating}
                         startVotes={selectedMountain.votes}
                         closeModal={() => setModalVisible(false)}
+                        selectedRating={selectedRating}
+                        onSetRating={value => setSelectedRating(value)}
                     />
                 </TouchableOpacity>
             </Modal>
