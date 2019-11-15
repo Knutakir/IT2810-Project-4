@@ -26,7 +26,7 @@ export default function ListItem({
                     <View style={styles.rating}>
                         <Ionicons name="md-star" size={25} color="#403632" style={styles.star} />
                         <Text style={styles.rightText}>
-                            {parseFloat(rating).toFixed(2)}
+                            {parseFloat(rating).toFixed(1)}
                         </Text>
                     </View>
                     <Text style={styles.rightText}>{height} m</Text>
