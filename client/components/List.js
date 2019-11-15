@@ -12,7 +12,7 @@ import { vw } from 'react-native-expo-viewport-units';
 import ListItem from './ListItem';
 import DetailedContent from './DetailedContent';
 import Api from '../api/mountain';
-import { setPerformingSearch, setTotalPage } from '../actions';
+import { setPerformingSearch, setTotalPage, setSelectedPage } from '../actions';
 
 function List({
     currentPageNumber,
@@ -25,6 +25,7 @@ function List({
     performingSearch,
     onUpdatePerformingSearch,
     onUpdateTotalPageNumber,
+    onUpdateSelectedPage,
 }) {
     const [modalVisible, setModalVisible] = useState(false);
     const [mountains, setMountains] = useState([]);
@@ -73,8 +74,16 @@ function List({
 
     // Refresh the list after changing of search, filtering and soring
     useEffect(() => {
+        // Set current page to first page
+        onUpdateSelectedPage(1);
+
         searchMountains();
-    }, [currentPageNumber, sortingType, sortingOrder, filteringCountry, filteringHeight, filteringRating, searchValue]);
+    }, [sortingType, sortingOrder, filteringCountry, filteringHeight, filteringRating, searchValue]);
+
+    // Refresh the current page number
+    useEffect(() => {
+        searchMountains();
+    }, [currentPageNumber]);
 
     // Refresh the list after triggering refresh
     useEffect(() => {
@@ -145,6 +154,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onUpdatePerformingSearch: performingSearch => dispatch(setPerformingSearch(performingSearch)),
     onUpdateTotalPageNumber: totalPageNumber => dispatch(setTotalPage(totalPageNumber)),
+    onUpdateSelectedPage: pageNumber => dispatch(setSelectedPage(pageNumber)),
 });
 
 List.propTypes = {
@@ -158,6 +168,7 @@ List.propTypes = {
     performingSearch: PropTypes.bool,
     onUpdatePerformingSearch: PropTypes.func,
     onUpdateTotalPageNumber: PropTypes.func,
+    onUpdateSelectedPage: PropTypes.func,
 };
 
 List.defaultProps = {
@@ -171,6 +182,7 @@ List.defaultProps = {
     performingSearch: false,
     onUpdatePerformingSearch: null,
     onUpdateTotalPageNumber: null,
+    onUpdateSelectedPage: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(List);
