@@ -4,6 +4,7 @@ import {
     Text,
     Picker,
     StyleSheet,
+    Platform,
 } from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { connect } from 'react-redux';
@@ -39,6 +40,7 @@ function Filter({
                 <View style={[styles.pickerView, commonStyles.shadow]}>
                     <Picker
                         style={styles.picker}
+                        itemStyle={styles.pickerItem}
                         selectedValue={filteringCountry}
                         onValueChange={itemValue => onUpdateFilteringCountry(itemValue)}
                     >
@@ -100,9 +102,12 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     picker: {
-        height: 50,
+        height: Platform.OS === 'ios' ? 150 : 50,
         width: 150,
         color: 'rgb(64, 54, 50)',
+    },
+    pickerItem: {
+        height: Platform.OS === 'ios' ? 150 : 50,
     },
     sliderView: {
         flexDirection: 'row',
