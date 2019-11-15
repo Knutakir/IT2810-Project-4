@@ -9,7 +9,8 @@ const searchMountains = (query, pageNumber, sortingObject, filteringObject) => n
             }
 
             return reject();
-        });
+        })
+        .catch(error => reject(error));
 });
 
 const getCountries = () => new Promise((resolve, reject) => {
