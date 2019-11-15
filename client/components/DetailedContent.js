@@ -14,7 +14,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import { vw, vh } from 'react-native-expo-viewport-units';
-import { Platform } from '@unimodules/core';
 
 function DetailedContent({
     mountainId,
@@ -80,6 +79,8 @@ const styles = StyleSheet.create({
 	    borderRadius: 5,
         marginTop: vh(4),
         padding: 20,
+        borderWidth: 1,
+        borderColor: '#e0c4ba',
     },
     modalTitle: {
         fontSize: 30,

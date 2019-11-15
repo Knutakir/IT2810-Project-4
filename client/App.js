@@ -20,6 +20,7 @@ import List from './components/List';
 import Filter from './components/Filter';
 import ModifyResultContainer from './components/ModifyResultContainer';
 import Rating from './components/Rating';
+import Pagintion from './components/Pagination';
 import Api from './api/mountain';
 
 const store = createStore(reducer);
@@ -92,6 +93,7 @@ export default function App() {
                             <Button title="-" onPress={() => setRating(rating - 1)} />
                             <Button title="+" onPress={() => setRating(rating + 1)} />
                             <List />
+                            <Pagintion />
                         </View>
                     </ScrollView>
                 </View>
