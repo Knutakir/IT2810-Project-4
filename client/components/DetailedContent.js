@@ -75,7 +75,7 @@ function DetailedContent({
     };
 
     return (
-        <ScrollView directionalLockEnabled>
+        <ScrollView>
             <TouchableWithoutFeedback>
                 <View style={styles.modalContentContainer}>
                     <View style={styles.header}>
@@ -115,9 +115,9 @@ const styles = StyleSheet.create({
     modalContentContainer: {
         backgroundColor: '#fdebe0',
         width: vw(90),
-        maxHeight: vh(90),
         borderRadius: 5,
         marginTop: vh(4),
+        marginBottom: vh(4),
         padding: 20,
     },
     modalTitle: {
