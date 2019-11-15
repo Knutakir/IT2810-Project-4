@@ -59,6 +59,12 @@ $ npm run lint
 
 ## Testing
 ### Responsive design and OS
+
+
+The group tested the application and made sure that the different filtering options worked together, and that they worked with search and sorting. The pagination and rating was tested. The group made sure that AsyncStorage worked as intended, also after reopening the application. 
+
+All of these functionalites were tested on both iOS and Android. There was also done testing of the responsive design, to make sure that it woked well on different sizes. 
+
 The group tested the application on three different mobile devices, an iPhone 5s with iOS, a Samsung Galaxy Tab S2 with Android and a Samsung Galaxy S9+.
 
 Picker, small other changes
@@ -92,46 +98,47 @@ Screenshots from the different devices:
 
 
 ### Manual end-to-end testing
-SKriv om hva vi testet, flere filter osv.
-Tested on both iOS and Android.  
-
 
 #### Scenario 1
-1. Chose filtering option country: `Australia`
-2. Chose filtering option mountain height from `2000`-4060:
-3. Expect that the list will show `Mount Walter` first.
+Test that two filters can be used on the data at the same time.
+1. Filter on country `Australia`.
+2. Filter on height from `2000-4060`.
+3. Expect that the list will show the mountain `Mount Walter` first.
 
 #### Scenario 2
-1. Sort by height 
-2. Click arrow to point up
-3. Expect `Mount Le Conte` to be at the top of the list (with 2010 m) 
+Test that sorting is not reset after filtering. 
+1. Sort by height. 
+2. Click arrow to point up.
+3. Expect `Mount Le Conte` to be at the top of the list (with 2010 m height).
 4. Filter by only mountains over 8500 m.
-5. expect 4 results where `Lhotse` is at top and `Mount Everest` (highest mountain) is at the bottom of the list.  
+5. Expect 4 results where `Lhotse` is at the top and `Mount Everest` (highest mountain) is at the bottom of the list.  
 
 #### Scenario 3
+Test that a user only can rate a mountain one time (on the same phone/application instance).
 1. Click an unrated mountain to get detailed information.
-2. Click at the number of stars wanted to rate
+2. Click at the number of stars wanted to rate.
 3. Click `Yes` when getting the alert notification.
 4. Expect message `You have rated this mountain _ stars!` to appear above the rating. 
-5. Click a star again. 
+5. Click one of the stars again. 
 6. Expect to get alert `You have already voted for this mountain!`.
 7. Close and reopen the app.
 8. Expect that the rating is saved for the same mountain. 
 
 #### Scenario 4
+Test that it is possible to cancel a rating when the alert appears.
 1. Click an unrated mountain to get detailed information.
 2. Click at the number of stars wanted to rate. 
 3. Click `Cancel` when getting the alert notification.
 4. Expect no rating to be saved. 
 
 #### Scenario 5
-Test that the current page number resets.
+Test that the active page number resets.
 1. Go to page number 3.
 2. Search for `F`.
 3. Expect to be on page number 1.
 
 #### Scenario 6
-Test 
+Test that the pagination works. 
 1. Search for `H`.
 2. Scroll to the bottom.
 3. Expect to see maximum page as 21.
