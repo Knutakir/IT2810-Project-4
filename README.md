@@ -46,6 +46,7 @@ The command line interface also provided fast upload of the application after ev
 ## Redux
 
 ## AsyncStorage
+In this project the group used `AsyncStorage` for storing the if the user has rated a mountain in the mobile application. AsyncStorage made it possible for persistance data to be stored on the device from one to the next run. `AsyncStorage` works similiar to `LocalStorage` for the web, but is asynchronous and returns a `Promise`. The feature we implemented is available after searching/filtering/sorting and selecting a mountain to open the modal with the given mountain. Then on the bottom of the modal there is stars that can be used for rate the selected mountain. The user of the application is only available to rate a mountain once and this is stored in the AsyncStorage and checked every time a mountain is selected. If a selected mountain is already rated by the user of the application, then a message appears to the user over the stars and if the user presses the stars. 
 
 ## Git usage and code style
 The group used issues with connected branches for the bigger tasks of the project. The commits was also marked with which issue they contributed to. 
