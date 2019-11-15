@@ -36,9 +36,64 @@ structure -> only one file
 
 ## AsyncStorage
 
-## Git usage
+## Git usage and code style
+The group used issues with connected branches for the bigger tasks of the project. The commits was also marked with which issue they contributed to. 
+
+### Lint
+The group used ESLint for linting. To run the linting, use this command in the `server` or `client` directory: 
+```sh
+$ npm run lint
+```
 
 ## Testing
+### Responsive design and OS
+The group tested the application on three different mobile devices, an iPhone 5s with iOS, a Samsung Galaxy Tab S2 with Android and a Samsung Galaxy S9+.
+
+Picker, small other changes
+
+Another challenge was to adapt the application to both the iPhone and the Samsung Tab. The iPhone that were used is a very small device, and the tab is significantly larger. This lead to "småfiksing" to make the application look good enough on all of the devices, where a library with viewport height and width came in handy. 
+
+Some screenshots: 
+
+
+### Manual end-to-end testing
+SKriv om hva vi testet, flere filter osv. 
+
+
+#### Scenario 1
+1. Chose filtering option ... 
+2. Chose filtering option ...
+3. Expect that the list will show ... first
+
+#### Scenario 2
+1. Sort by height 
+2. Click arrow
+3. Expect .. to 
+4. Filter by only mountains over 8...
+5. expect 3 results.. 
+
+#### Scenario 3
+1. rate
+2. 
+
+#### Scenario 4
+1. page 3
+2. search
+3. Expect to be on page 1
+
+#### Scenario 5
+1. search
+2. bla ned
+3. Expect to show .. pages
+4. click last page
+5. expect to see .. as last mountains
+
+### Test
+To run server tests from the previous project run these commands: 
+```sh
+$ cd server
+$ npm test
+```
 
 ## Other Third Party Components and Libraries
 
