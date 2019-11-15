@@ -26,6 +26,7 @@ const hasVotedForMountain = async mountainId => {
 
         return 0;
     } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error);
         return 0;
     }
@@ -50,6 +51,7 @@ const voteForMountain = async (mountainId, votingScore) => {
 
         await AsyncStorage.setItem(ITEM_KEY, JSON.stringify(mountains));
     } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error);
     }
 };
