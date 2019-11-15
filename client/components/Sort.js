@@ -34,27 +34,35 @@ function Sort({
                     <Picker.Item label="Rating" value="rating" color="rgb(64, 54, 50)" />
                 </Picker>
             </View>
-            <Text style={commonStyles.text}>in order</Text>
-            <Ionicons
-                style={[styles.sortingOrder, commonStyles.shadow]}
-                name={(sortingOrder === 1) ? ('md-arrow-round-up') : ('md-arrow-round-down')}
-                size={28}
-                color="#403632"
-                onPress={() => onUpdateSortingOrder(-sortingOrder)}
-            />
+            <View style={styles.inOrderContainer}>
+                <Text style={commonStyles.text}>in order</Text>
+                <View style={[styles.sortingOrder, commonStyles.shadow]}>
+                    <Ionicons
+                        style={styles.icon}
+                        name={(sortingOrder === 1) ? ('md-arrow-round-up') : ('md-arrow-round-down')}
+                        size={28}
+                        color="#403632"
+                        onPress={() => onUpdateSortingOrder(-sortingOrder)}
+                    />
+                </View>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     view: {
+        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        padding: 10,
     },
     pickerView: {
         backgroundColor: '#f0d5c9',
         borderRadius: 5,
-        margin: 10,
+        margin: 5,
     },
     picker: {
         height: Platform.OS === 'ios' ? 150 : 50,
@@ -73,6 +81,14 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: 'rgb(64, 54, 50)',
         marginLeft: 10,
+    },
+    inOrderContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    icon: {
+        color: 'rgb(64, 54, 50)',
     },
 });
 
