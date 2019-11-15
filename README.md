@@ -157,14 +157,16 @@ $ npm test
 ```
 
 ## Other Third Party Components and Libraries
-
-Less third party components because native comps
+In this project the group used less third party components than in the web application project, because `React Native` is a framework rather than `React` which is only a library and it comes with many native components. The group also wanted to have similiar components and styles as to the previous project and therefore did reuse much of the code from that project and could easily replace `<div>` with `<View>`/`<ScrollView>`/etc. and `<p>` with `<Text>`.
 
 ### <a href="https://expo.github.io/vector-icons/">@expo/vector-icons Ionicons</a>
+`@expo/vector-icons` is a library consisting of many icon packages such as `Ionicons`, `FontAwesome`, `MaterialIcons` and more. In this project the group used the Ionicons from this package, as that was the icons that was usde in the previous project. The icons were easily accessible with very similiar names. The icons was used for arrows, search, close and stars.
 
 ### <a href="https://github.com/ptomasroos/react-native-multi-slider">react-native-multi-slider</a>
+`react-native-multi-slider` is a library for using a slider with two markers on the slider. This is not something that comes with React Native and was very much like another component in functionality that the group used in the previous project. The sliders was used for filtering between height and rating of the mountains.
 
 ### <a href="https://github.com/joetakara/react-native-expo-viewport-units">react-native-expo-viewport-units</a>
+`react-native-expo-viewport-units` was used for setting the heights and widths much more relative to the device screen size. This was possible by allowing to use `viewport width` (`vw`) and `viewport height` (`vh`). As this is not a feature in React Native itself, it made it much easier to calculate a better responsive size for components accross devices.
 
 ## Credits
 * Header image is created by <a href="https://www.freepik.com/free-vector/mountain-landscape_4391852.htm"> kjpargeter - Freepik</a>.
