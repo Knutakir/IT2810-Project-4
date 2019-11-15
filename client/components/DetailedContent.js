@@ -8,11 +8,13 @@ import {
     TouchableWithoutFeedback,
     Text,
     ScrollView,
+    Linking,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import { vw, vh } from 'react-native-expo-viewport-units';
+import { Platform } from '@unimodules/core';
 
 function DetailedContent({
     mountainId,
@@ -28,6 +30,10 @@ function DetailedContent({
     onUpdatePerformingSearch,
     closeModal,
 }) {
+
+    const openMap = (latitude, longitude) => {
+        Linking.openURL(`https://www.google.no/maps/@${latitude},${longitude},10z`);
+    };
 
     return (
         <ScrollView directionalLockEnabled>
@@ -51,7 +57,10 @@ function DetailedContent({
                         <Text style={styles.boldText}>Address</Text>
                         <Text style={styles.valueText}>{formattedAddress}</Text>
                         <Text style={styles.boldText}>Position</Text>
-                        <Text style={styles.valueText}>latitude: {latitude}, longitude: {longitude}</Text>
+                        <Text style={styles.valuePositionText}>latitude: {latitude}, longitude: {longitude}</Text>
+                        <TouchableOpacity activeOpacity={0.7} onPress={() => openMap(latitude, longitude)}>
+                            <Text style={[styles.valueText, styles.mapText]}>Open in Google Maps</Text>
+                        </TouchableOpacity>
                         <Text style={styles.boldText}>Rating</Text>
                         <View style={styles.ratingContainer}>
                             <Text>{startRating}</Text>
@@ -96,6 +105,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#5c4d48',
         marginBottom: 15,
+    },
+    valuePositionText: {
+        fontSize: 20,
+        color: '#5c4d48',
+    },
+    mapText: {
+        textDecorationLine: 'underline',
     },
     ratingContainer: {
         marginBottom: 15,
