@@ -12,8 +12,8 @@ import commonStyles from './commonStyles';
 
 // eslint-disable-next-line react/prop-types
 function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) {
-    currentPageNumber = 4;
-    totalPageNumber = 6;
+    currentPageNumber = 44;
+    totalPageNumber = 60;
     const back = () => {
         if (currentPageNumber !== 1) {
             //onUpdateSelectedPage(currentPageNumber - 1);
@@ -34,7 +34,7 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
             { currentPageNumber !== 1 && (
                 <TouchableOpacity activeOpacity={0.7} onPress={() => back()}>
                     <View style={[commonStyles.shadow, styles.button]}>
-                        <Ionicons name="md-arrow-round-back" size={35} color="#403632" style={styles.icon} />
+                        <Ionicons name="md-arrow-round-back" size={38} color="#403632" style={styles.icon} />
                     </View>
                 </TouchableOpacity>
             )}
@@ -74,7 +74,7 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
             { currentPageNumber !== totalPageNumber && (
                 <TouchableOpacity activeOpacity={0.7} onPress={() => forward()}>
                     <View style={[commonStyles.shadow, styles.button]}>
-                        <Ionicons name="md-arrow-round-forward" size={35} color="#403632" style={styles.icon} />
+                        <Ionicons name="md-arrow-round-forward" size={38} color="#403632" style={styles.icon} />
                     </View>
                 </TouchableOpacity>
             )}
@@ -89,31 +89,41 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         minWidth: vw(50),
-        marginTop: 20,
+        marginTop: 18,
         marginBottom: 20,
     },
     button: {
         backgroundColor: '#f0d5c9',
         borderRadius: 5,
         color: 'rgb(64, 54, 50)',
-        padding: 10,
-        width: 50,
+        padding: vw(1.5),
+        width: vw(14),
+        height: vw(14),
+        maxHeight: 62,
+        maxWidth: 62,
+        margin: 2,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     text: {
-        fontSize: 26,
+        fontSize: 30,
         textAlign: 'center',
         color: '#403632',
+        textAlignVertical: 'center',
     },
     dots: {
-        fontSize: 26,
+        fontSize: vw(8),
         textAlign: 'center',
         color: '#d1a797',
+        marginBottom: vw(2),
     },
     current: {
         backgroundColor: '#d1a797',
     },
     icon: {
         textAlign: 'center',
+        textAlignVertical: 'center',
     }
 });
 
