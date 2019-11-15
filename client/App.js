@@ -18,6 +18,7 @@ import Sort from './components/Sort';
 import List from './components/List';
 import Filter from './components/Filter';
 import ModifyResultContainer from './components/ModifyResultContainer';
+import Pagintion from './components/Pagination';
 import Api from './api/mountain';
 
 const store = createStore(reducer);
@@ -68,6 +69,7 @@ export default function App() {
                                 <Filter countries={countries} />
                             </ModifyResultContainer>
                             <List />
+                            <Pagintion />
                         </View>
                     </ScrollView>
                 </View>

@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
         marginTop: vh(4),
         marginBottom: vh(4),
         padding: 20,
+        borderWidth: 1,
+        borderColor: '#e0c4ba',
     },
     modalTitle: {
         fontSize: 30,
