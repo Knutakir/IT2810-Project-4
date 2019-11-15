@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
+import commonStyles from './commonStyles';
 
 export default function ListItem({
     name,
@@ -16,7 +17,7 @@ export default function ListItem({
     clickItem,
 }) {
     return (
-        <TouchableOpacity style={styles.listItem} activeOpacity={0.7} onPress={() => clickItem()}>
+        <TouchableOpacity style={[styles.listItem, commonStyles.shadow]} activeOpacity={0.7} onPress={() => clickItem()}>
             <View style={styles.itemColumns}>
                 <View>
                     <Text style={styles.nameText}>{name}</Text>
@@ -76,11 +77,6 @@ const styles = StyleSheet.create({
         marginRight: 4,
     },
 });
-
-/*
-    TODO:
-    box-shadow: 3px 3px 8px 1px rgba(0,0,0,0.5);
-*/
 
 ListItem.propTypes = {
     name: PropTypes.string,

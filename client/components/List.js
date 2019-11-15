@@ -54,7 +54,6 @@ function List({
                     country={mountain.mainCountry}
                     height={mountain.metres}
                     rating={mountain.rating}
-                    // TODO: parse rating to float and fixed to 2 decimals?
                     clickItem={() => clickListItem(mountain.mountain)}
                 />
             ))}
