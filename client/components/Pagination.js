@@ -28,6 +28,11 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
         onUpdateSelectedPage(number);
     };
 
+    // If no results do not show page numbers
+    if (totalPageNumber <= 0) {
+        return <Text style={[styles.text, commonStyles.text]}>No results!</Text>;
+    }
+
     /* Creates the pagination */
     return (
         <View style={styles.pagination}>
