@@ -9,10 +9,10 @@ import {
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { vw } from 'react-native-expo-viewport-units';
 import { setFilteringCountry, setFilteringHeight, setFilteringRating } from '../actions';
 import commonStyles from './commonStyles';
 import CustomButton from './CustomButton';
-import { vw } from 'react-native-expo-viewport-units';
 
 function Filter({
     onUpdateFilteringCountry,
@@ -57,7 +57,7 @@ function Filter({
             <View style={styles.sliderView}>
                 <Text style={[styles.sliderText, commonStyles.text]}>{sliderHeightValues[0]}</Text>
                 <MultiSlider
-                    sliderLength={vw(60)}
+                    sliderLength={vw(55)}
                     markerStyle={styles.sliderMarker}
                     unselectedStyle={styles.sliderUnselected}
                     selectedStyle={styles.sliderSelected}
@@ -74,7 +74,7 @@ function Filter({
             <View style={styles.sliderView}>
                 <Text style={[styles.sliderText, commonStyles.text]}>{sliderRatingValues[0]}</Text>
                 <MultiSlider
-                    sliderLength={vw(70)}
+                    sliderLength={vw(68)}
                     markerStyle={styles.sliderMarker}
                     unselectedStyle={styles.sliderUnselected}
                     selectedStyle={styles.sliderSelected}
@@ -97,8 +97,11 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     topView: {
+        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
     },
     pickerView: {
         backgroundColor: '#f0d5c9',
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
     },
     sliderText: {
         fontSize: 15,
-        margin: 10,
+        margin: 16,
     },
     sliderMarker: {
         backgroundColor: '#f0d5c9',

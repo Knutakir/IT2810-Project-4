@@ -8,6 +8,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import commonStyles from './commonStyles';
+import { vw } from 'react-native-expo-viewport-units';
 
 export default function ListItem({
     name,
@@ -19,7 +20,7 @@ export default function ListItem({
     return (
         <TouchableOpacity style={[styles.listItem, commonStyles.shadow]} activeOpacity={0.7} onPress={() => clickItem()}>
             <View style={styles.itemColumns}>
-                <View>
+                <View style={styles.nameColumn}>
                     <Text style={styles.nameText}>{name}</Text>
                     <Text style={styles.countryText}>{country}</Text>
                 </View>
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        flexWrap: 'wrap',
         padding: 10,
         paddingRight: 20,
         paddingLeft: 20,
@@ -73,6 +75,9 @@ const styles = StyleSheet.create({
     },
     star: {
         marginRight: 4,
+    },
+    nameColumn: {
+        maxWidth: vw(55),
     },
 });
 

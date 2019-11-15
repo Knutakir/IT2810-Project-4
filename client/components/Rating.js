@@ -8,6 +8,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import commonStyles from './commonStyles';
+import { vw } from 'react-native-expo-viewport-units';
 
 function Rating({rating, votes, onSetRating}) {
     const voteOnMountain = score => {
@@ -39,7 +40,7 @@ function Rating({rating, votes, onSetRating}) {
         <View style={styles.view}>
             {starArray}
             <Text
-                style={[styles.voteText, commonStyles.text]}
+                style={styles.voteText}
             >
                 {parseFloat(rating).toFixed(2)} ({votes} votes)
             </Text>
@@ -51,10 +52,12 @@ const styles = StyleSheet.create({
     view: {
         flexDirection: 'row',
         alignItems: 'center',
+        flexWrap: 'wrap',
     },
     voteText: {
         marginLeft: 10,
         fontSize: 18,
+        color: '#5c4d48',
     },
 });
 

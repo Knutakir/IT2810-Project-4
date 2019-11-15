@@ -37,7 +37,7 @@ function ModifyResultContainer({children, type}) {
 const styles = StyleSheet.create({
     outerView: {
         width: vw(90),
-        margin: 7,
+        margin: 5,
         padding: 3,
     },
     button: {

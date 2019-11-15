@@ -80,8 +80,8 @@ function DetailedContent({
                 <View style={styles.modalContentContainer}>
                     <View style={styles.header}>
                         <Text style={styles.modalTitle}>Detailed Information</Text>
-                        <TouchableOpacity onPress={() => closeModal()}>
-                            <Ionicons name="md-close" size={vw(6)} color="#5c4d48" />
+                        <TouchableOpacity onPress={() => closeModal()} style={styles.close}>
+                            <Ionicons name="md-close" size={vh(6)} color="#5c4d48" />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.content}>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         borderColor: '#e0c4ba',
     },
     modalTitle: {
-        fontSize: 30,
+        fontSize: 28,
         color: '#5c4d48',
         fontWeight: 'bold',
     },
@@ -156,6 +156,10 @@ const styles = StyleSheet.create({
     },
     ratingContainer: {
         marginBottom: 15,
+    },
+    close: {
+        padding: 3,
+        marginLeft: 5,
     },
 });
 
