@@ -93,7 +93,7 @@ SKriv om hva vi testet, flere filter osv.
 4. click last page
 5. expect to see .. as last mountains
 
-### Test
+### Tests
 To run server tests from the previous project run these commands: 
 ```sh
 $ cd server
@@ -101,6 +101,14 @@ $ npm test
 ```
 
 ## Other Third Party Components and Libraries
+
+Less third party components because native comps
+
+### <a href="https://expo.github.io/vector-icons/">@expo/vector-icons Ionicons</a>
+
+### <a href="https://github.com/ptomasroos/react-native-multi-slider">react-native-multi-slider</a>
+
+### <a href="https://github.com/joetakara/react-native-expo-viewport-units">react-native-expo-viewport-units</a>
 
 ## Credits
 * Header image is created by <a href="https://www.freepik.com/free-vector/mountain-landscape_4391852.htm"> kjpargeter - Freepik</a>.
