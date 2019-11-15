@@ -7,9 +7,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
-import commonStyles from './commonStyles';
-import CustomButton from './CustomButton';
 import { vw } from 'react-native-expo-viewport-units';
+import commonStyles from './commonStyles';
 
 // eslint-disable-next-line react/prop-types
 function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) {
@@ -17,30 +16,30 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
     totalPageNumber = 6;
     const back = () => {
         if (currentPageNumber !== 1) {
-            onUpdateSelectedPage(currentPageNumber - 1);
+            //onUpdateSelectedPage(currentPageNumber - 1);
         }
     };
     const forward = () => {
         if (currentPageNumber !== totalPageNumber) {
-            onUpdateSelectedPage(currentPageNumber + 1);
+            //onUpdateSelectedPage(currentPageNumber + 1);
         }
     };
     const clickNumber = number => {
-        onUpdateSelectedPage(number);
+        //onUpdateSelectedPage(number);
     };
 
     /* Creates the pagination */
     return (
         <View style={styles.pagination}>
             { currentPageNumber !== 1 && (
-                <TouchableOpacity activeOpacity={0.7}>
+                <TouchableOpacity activeOpacity={0.7} onPress={() => back()}>
                     <View style={[commonStyles.shadow, styles.button]}>
                         <Ionicons name="md-arrow-round-back" size={35} color="#403632" style={styles.icon} />
                     </View>
                 </TouchableOpacity>
             )}
             { currentPageNumber > 1 && (
-                <TouchableOpacity activeOpacity={0.7}>
+                <TouchableOpacity activeOpacity={0.7} onPress={() => clickNumber(1)}>
                     <View style={[commonStyles.shadow, styles.button]}>
                         <Text style={styles.text}>
                             1
@@ -49,22 +48,22 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
                 </TouchableOpacity>
             )}
             { currentPageNumber > 2 && (
-                <Text style={styles.text}>
+                <Text style={styles.dots}>
                     ...
                 </Text>
             )}
-            <View style={[commonStyles.shadow, styles.button]}>
+            <View style={[commonStyles.shadow, styles.button, styles.current]}>
                 <Text style={styles.text}>
                     {currentPageNumber}
                 </Text>
             </View>
             { currentPageNumber < totalPageNumber - 1 && (
-                <Text style={styles.text}>
+                <Text style={styles.dots}>
                     ...
                 </Text>
             )}
             { currentPageNumber < totalPageNumber && (
-                <TouchableOpacity activeOpacity={0.7}>
+                <TouchableOpacity activeOpacity={0.7} onPress={() => clickNumber(totalPageNumber)}>
                     <View style={[commonStyles.shadow, styles.button]}>
                         <Text style={styles.text}>
                             {totalPageNumber}
@@ -73,7 +72,7 @@ function Pagination({onUpdateSelectedPage, currentPageNumber, totalPageNumber}) 
                 </TouchableOpacity>
             )}
             { currentPageNumber !== totalPageNumber && (
-                <TouchableOpacity activeOpacity={0.7}>
+                <TouchableOpacity activeOpacity={0.7} onPress={() => forward()}>
                     <View style={[commonStyles.shadow, styles.button]}>
                         <Ionicons name="md-arrow-round-forward" size={35} color="#403632" style={styles.icon} />
                     </View>
@@ -90,6 +89,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         minWidth: vw(50),
+        marginTop: 20,
+        marginBottom: 20,
     },
     button: {
         backgroundColor: '#f0d5c9',
@@ -101,6 +102,15 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 26,
         textAlign: 'center',
+        color: '#403632',
+    },
+    dots: {
+        fontSize: 26,
+        textAlign: 'center',
+        color: '#d1a797',
+    },
+    current: {
+        backgroundColor: '#d1a797',
     },
     icon: {
         textAlign: 'center',
