@@ -3,6 +3,7 @@ import {
     StyleSheet,
     Text,
     View,
+    ScrollView,
     Image,
     Dimensions,
     Button,
@@ -63,23 +64,25 @@ export default function App() {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.title}>Mountain Finder</Text>
-                    </View>
-                    <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
-                    <View style={styles.contentContainer}>
-                        <Search />
-                        <ModifyResultContainer type="Sort">
-                            <Sort />
-                        </ModifyResultContainer>
-                        <ModifyResultContainer type="Filter">
-                            <Filter />
-                        </ModifyResultContainer>
-                        <Rating rating={rating} votes={rating} onSetRating={value => onStarRatingPressed(value)} />
-                        <Button title="-" onPress={() => setRating(rating - 1)} />
-                        <Button title="+" onPress={() => setRating(rating + 1)} />
-                        <List />
-                    </View>
+                    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title}>Mountain Finder</Text>
+                        </View>
+                        <Image style={styles.backgroundImage} source={require('./assets/pink-mountains.jpg')} />
+                        <View style={styles.contentContainer}>
+                            <Search />
+                            <ModifyResultContainer type="Sort">
+                                <Sort />
+                            </ModifyResultContainer>
+                            <ModifyResultContainer type="Filter">
+                                <Filter />
+                            </ModifyResultContainer>
+                            <Rating rating={rating} votes={rating} onSetRating={value => onStarRatingPressed(value)} />
+                            <Button title="-" onPress={() => setRating(rating - 1)} />
+                            <Button title="+" onPress={() => setRating(rating + 1)} />
+                            <List />
+                        </View>
+                    </ScrollView>
                 </View>
             </Provider>
         );
@@ -94,6 +97,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: background,
+        alignItems: 'center',
+    },
+    scrollViewContainer: {
         alignItems: 'center',
     },
     titleContainer: {
@@ -117,7 +123,6 @@ const styles = StyleSheet.create({
         resizeMode: 'stretch',
     },
     contentContainer: {
-        height: vh(60),
         width: vw(90),
         alignItems: 'center',
     },
