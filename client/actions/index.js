@@ -1,4 +1,6 @@
 import {
+    UPDATE_PAGE_NUMBER,
+    UPDATE_TOTAL_PAGE_NUMBER,
     SORTING_TYPE,
     SORTING_ORDER,
     FILTERING_COUNTRY,
@@ -7,6 +9,16 @@ import {
     UPDATE_SEARCH_VALUE,
     UPDATE_PERFORMING_SEARCH,
 } from '../actionTypes';
+
+export const setSelectedPage = pageNumber => ({
+    type: UPDATE_PAGE_NUMBER,
+    pageNumber,
+});
+
+export const setTotalPage = totalPageNumber => ({
+    type: UPDATE_TOTAL_PAGE_NUMBER,
+    totalPageNumber,
+});
 
 export const setSearchValue = searchValue => ({
     type: UPDATE_SEARCH_VALUE,

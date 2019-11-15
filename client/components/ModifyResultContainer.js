@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
+import { vw } from 'react-native-expo-viewport-units';
 import commonStyles from './commonStyles';
 
 function ModifyResultContainer({children, type}) {
@@ -25,7 +26,7 @@ function ModifyResultContainer({children, type}) {
                 </View>
             </TouchableOpacity>
             {!hidden && (
-                <View>
+                <View style={styles.childrenView}>
                     {children}
                 </View>
             )}
@@ -35,6 +36,7 @@ function ModifyResultContainer({children, type}) {
 
 const styles = StyleSheet.create({
     outerView: {
+        width: vw(90),
         margin: 7,
         padding: 3,
     },
@@ -48,6 +50,12 @@ const styles = StyleSheet.create({
     containerText: {
         textDecorationLine: 'underline',
         marginRight: 10,
+    },
+    childrenView: {
+        flexDirection: 'row',
+        backgroundColor: '#403632',
+        borderRadius: 5,
+        justifyContent: 'center',
     },
 });
 
