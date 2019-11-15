@@ -33,9 +33,12 @@ function DetailedContent({
         <ScrollView directionalLockEnabled>
             <TouchableWithoutFeedback>
                 <View style={styles.modalContentContainer}>
-                    <TouchableOpacity onPress={() => closeModal()}>
-                        <Ionicons name="md-close" size={vw(6)} color="#5c4d48" style={styles.close} />
-                    </TouchableOpacity>
+                    <View style={styles.header}>
+                        <Text style={styles.modalTitle}>Detailed Information</Text>
+                        <TouchableOpacity onPress={() => closeModal()}>
+                            <Ionicons name="md-close" size={vw(6)} color="#5c4d48" style={styles.close} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </TouchableWithoutFeedback>
         </ScrollView>
@@ -51,8 +54,23 @@ const styles = StyleSheet.create({
         marginTop: vh(4),
     },
     close: {
-        margin: 10,
-    }
+        /*margin: 10,*/
+    },
+    modalTitle: {
+        fontSize: 30,
+        color: '#5c4d48',
+        fontWeight: 'bold',
+    },
+    header: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        margin: 20,
+        marginBottom: 30,
+        borderBottomWidth: 1,
+        borderColor: '#e0c4ba',
+    },
 });
 
 DetailedContent.propTypes = {
@@ -67,6 +85,7 @@ DetailedContent.propTypes = {
     startRating: PropTypes.string,
     startVotes: PropTypes.number,
     onUpdatePerformingSearch: PropTypes.func,
+    closeModal: PropTypes.func,
 };
 
 DetailedContent.defaultProps = {
@@ -81,6 +100,7 @@ DetailedContent.defaultProps = {
     startRating: '0',
     startVotes: 0,
     onUpdatePerformingSearch: null,
+    closeModal: null,
 };
 
 const mapStateToProps = state => ({
