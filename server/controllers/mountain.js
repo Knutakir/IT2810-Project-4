@@ -59,7 +59,7 @@ module.exports.searchMountain = async (res, query, pageNumber, sortingObject, fi
 
     const mountains = tempMountains.map(currentMountain => {
         // Check if the mountains rating is a number
-        const currentRating = (Number.isNaN(currentMountain.rating.$numberDecimal)) ? parseFloat(currentMountain.rating.$numberDecimal) : 0;
+        const currentRating = (Number.isNaN(currentMountain.rating.toString())) ? 0 : parseFloat(currentMountain.rating.toString());
 
         return {
             // eslint-disable-next-line no-underscore-dangle
