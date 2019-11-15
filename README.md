@@ -1,5 +1,7 @@
 # Project 4
 
+Mountain Finder is a website with over 1000 mountains with height over 2000 meters. You can search, sort and filter the mountains, and by clicking a specific mountain in the list, a modal appears with detailed mountain data. In this modal, you can rate the chosen mountain from 1-5, and see the total score. The mountain is rated by clicking the number of stars wanted. You can only rate once for every phone (or download instance). 
+
 ## Install and Run
 
 The client is set up to use the server on the VM, to use your own server with database ...
