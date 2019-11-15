@@ -41,7 +41,7 @@ module.exports.searchMountain = async (res, query, pageNumber, sortingObject, fi
     const start = (pageNumber - 1) * PAGE_SIZE;
 
     // Find mountains with fields containing the query for `mountain`, `metresSearchable` and `mainCountry`
-    const mountains = await Mountain.find({
+    const tempMountains = await Mountain.find({
         $and: [
             {
                 $or: [
@@ -56,6 +56,20 @@ module.exports.searchMountain = async (res, query, pageNumber, sortingObject, fi
         .sort(sortingObject)
         .skip(start)
         .limit(PAGE_SIZE);
+
+    const mountains = tempMountains.map(currentMountain => {
+        // Check if the mountains rating is a number
+        const currentRating = (Number.isNaN(currentMountain.rating.toString())) ? 0 : parseFloat(currentMountain.rating.toString());
+
+        return {
+            // eslint-disable-next-line no-underscore-dangle
+            id: currentMountain._id,
+            mountain: currentMountain.mountain,
+            metres: currentMountain.metres,
+            mainCountry: currentMountain.mainCountry,
+            rating: currentRating,
+        };
+    });
 
     const totalMountainCount = await Mountain.countDocuments({
         $and: [
