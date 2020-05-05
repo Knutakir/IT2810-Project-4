@@ -72,25 +72,25 @@ Another challenge was to adapt the application to both the iPhone and the Samsun
 The group did visual testing to make sure that the design looked good on multiple sizes and operating systems. Below are some screenshots from the different devices: 
 
 <div style="text-align: center">
-<strong>Image 1 and 2: Iphone 5s<strong><br>
+<strong>Image 1 and 2: Iphone 5s</strong><br>
 <img src="./images/iphone1.png" height=350/> <img src="./images/iphone2.png" height=350/><br>
 
-<strong>Image 3 and 4: Iphone 5s<strong><br>
+<strong>Image 3 and 4: Iphone 5s</strong><br>
 <img src="./images/iphone3.png" height=350/> <img src="./images/iphone4.png" height=350/>
 
-<strong>Image 5: Iphone 5s<strong><br>
+<strong>Image 5: Iphone 5s</strong><br>
 <img src="./images/iphone5.png" height=350/> 
 
-<strong>Image 6 and 7: Samsung Galaxy S9+<strong><br>
+<strong>Image 6 and 7: Samsung Galaxy S9+</strong><br>
 <img src="./images/samsung94.png" height=350/> <img src="./images/samsung93.png" height=350/><br>
 
-<strong>Image 8 and 9: Samsung Galaxy S9+<strong><br>
+<strong>Image 8 and 9: Samsung Galaxy S9+</strong><br>
 <img src="./images/samsung92.png" height=350/> <img src="./images/samsung91.png" height=350/><br>
 
-<strong>Image 10 and 11: Samsung Galaxy Tab S2<strong><br>
+<strong>Image 10 and 11: Samsung Galaxy Tab S2</strong><br>
 <img src="./images/samsung22.png" height=350/> <img src="./images/samsung24.png" height=350/><br>
 
-<strong>Image 12 and 13: Samsung Galaxy Tab S2<strong><br>
+<strong>Image 12 and 13: Samsung Galaxy Tab S2</strong><br>
 <img src="./images/samsung25.png" height=350/> <img src="./images/samsung21.png" height=350/><br>
 </div>
 
